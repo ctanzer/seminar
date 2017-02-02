@@ -47,7 +47,8 @@ def gradient(image):
 
     """
     grad_x, grad_y = np.gradient(image)
-    return grad_x, grad_y
+    grad = np.sqrt(grad_x**2 + grad_y**2)
+    return grad
 # GRADIENT ===================================================================================
 
 
