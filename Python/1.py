@@ -2,6 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy import pi
+from scipy import ndimage
 
 # Constants
 N = 35
@@ -45,40 +46,31 @@ def gradient(image):
     :returns: gradient in x and y direction
 
     """
-
-    r,c = image.shape
-
-    # Attach a copy of the edges so, that the gradient is right at the edges of the origianal image
-    image = np.concatenate((image,image[r-1:r,:]),axis=0)
-    image = np.concatenate((image[0:1,:],image),axis=0)
-    image = np.concatenate((image,image[:,c-1:c]),axis=1)
-    image = np.concatenate((image[:,0:1],image),axis=1)
-
     grad_x, grad_y = np.gradient(image)
-
-    print grad_x
-    grad_x = grad_x[1:-1,1:-1]
-    print grad_x
-
+    return grad_x, grad_y
 # GRADIENT ===================================================================================
 
 
 
 
+# img = cv2.imread('D:/Benutzer/Chrisu/Desktop/temp/bilder/kinglet.jpg',0)
 img = cv2.imread('bild1_small.jpg',0)
-print img
 
-gradient(img)
-
-B = img[0,0:len(img[0]):len(img[0])/N]*1
-
-img_test = img*1
-for i in range(len(img)):
-    for j in range(len(img[0])):
-        if distance(img[i,j], B, R_scale) >= nmbr_min:
-            img_test[i,j] = 0;
-
+# gradient(img)
+#
+# B = img[0,0:len(img[0]):len(img[0])/N]*1
+#
+# img_test = img*1
+# for i in range(len(img)):
+#     for j in range(len(img[0])):
+#         if distance(img[i,j], B, R_scale) >= nmbr_min:
+#             img_test[i,j] = 0;
+#
+#
+# plt.figure()
+# plt.imshow(img_test,cmap="gray")
 
 plt.figure()
-plt.imshow(img_test,cmap="gray")
+g = ndimage.gaussian_gradient_magnitude(img, 5)
+plt.imshow(g, cmap='gray')
 plt.show()
