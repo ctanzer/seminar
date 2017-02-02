@@ -54,19 +54,8 @@ def gradient(image):
 
 
 # img = cv2.imread('D:/Benutzer/Chrisu/Desktop/temp/bilder/kinglet.jpg',0)
-img = cv2.imread('bild1_small.jpg',0)
+img = cv2.imread('wecker.jpg',0)
 
-# gradient(img)
-#
-# B = img[0,0:len(img[0]):len(img[0])/N]*1
-#
-# img_test = img*1
-# for i in range(len(img)):
-#     for j in range(len(img[0])):
-#         if distance(img[i,j], B, R_scale) >= nmbr_min:
-#             img_test[i,j] = 0;
-#
-#
 # plt.figure()
 # plt.imshow(img_test,cmap="gray")
 
