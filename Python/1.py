@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from numpy import pi
 from scipy import ndimage
+import time
+
 
 # Constants
 N = 35
@@ -41,7 +43,7 @@ def gradient(image):
     :returns: gradient in x and y direction
 
     """
-    grad =  ndimage.gaussian_gradient_magnitude(img, 5)
+    grad =  ndimage.gaussian_gradient_magnitude(image, 5)
     avg_grad = np.average(grad)
 
     return grad, avg_grad
@@ -52,32 +54,56 @@ def decision(img, grad, background_pixel, background_grad):
     foreground = img*1
     for z in range(len(img)):
         for s in range(len(img[1])):
-            k = distance(img[z,s], grad[z,s], avg_grad, alpha, background_pixel[z,s], background_grad)
+            k = distance(img[z,s], grad[z,s], avg_grad, alpha, background_pixel[z,s], background_grad[z,s])
             if len(k[k<R_scale]) >= nmbr_min:
                 foreground[z,s] = 0
             else:
-                foreground[z,s] = 1    
+                foreground[z,s] = 255    
     return foreground
 # BACKGROUND_DECISION ========================================================================
 
 
 
 # img = cv2.imread('D:/Benutzer/Chrisu/Desktop/temp/bilder/kinglet.jpg',0)
-img = cv2.imread('wecker_small.jpg',0)
-grad, avg_grad = gradient(img)
 
+last_frame = 0
 
+cap = cv2.VideoCapture('video_wecker.avi')
 
-background_pixel = np.zeros((img.shape[0],img.shape[1],35))
-background_grad = np.zeros((grad.shape[0],grad.shape[1],35))
+ret, frame = cap.read()
+frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-for z in range(len(img)):
-    for s in range(len(img[1])):
-        k = distance(img[z,s], grad[z,s], avg_grad, alpha, background_pixel[z,s], background_grad)
-        if len(k[k<R_scale]) >= nmbr_min:
-            img[z,s] = 0
+grad, avg_grad = gradient(frame)
 
+background_pixel = np.zeros((frame.shape[0],frame.shape[1],N))
+for i in range(N):
+    background_pixel[:,:,i] = frame
 
-plt.figure()
-plt.imshow(img, cmap='gray')
-plt.show()
+background_grad = np.zeros((grad.shape[0],grad.shape[1],N))
+for i in range(N):
+    background_grad[:,:,i] = grad
+
+foreground = decision(frame,grad,background_pixel, background_grad)
+
+while(cap.isOpened()):
+    if ret == False:
+        cap.release()
+        cv2.destroyAllWindows()
+
+    last_frame = frame
+        
+    foreground = decision(frame,grad,background_pixel, background_grad) 
+
+    
+    cv2.imshow('foreground', foreground)
+    
+    while not cv2.waitKey(1) & 0xFF == ord('p'):
+        time.sleep(0.0001)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            cap.release()
+            cv2.destroyAllWindows()
+            break
+
+    ret, frame = cap.read()
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    grad, avg_grad = gradient(frame)
