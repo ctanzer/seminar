@@ -43,7 +43,7 @@ def gradient(image):
 
     :image: a grayscale image
     :returns: gradient in x and y direction
-    
+
     """
 
     r,c = image.shape
@@ -65,7 +65,7 @@ def gradient(image):
 
 
 
-img = cv2.imread('bild1.jpg',0)
+img = cv2.imread('bild1_small.jpg',0)
 print img
 
 gradient(img)
