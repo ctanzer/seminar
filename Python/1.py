@@ -27,8 +27,8 @@ def distance(pixel, grad, avg_grad, alpha, background_pixel, background_grad):
     :avg_grad: average gradient of the last frame
     :alpha: constant
     :background_pixel,background_grad: background history values
-    :returns: distance 
-    
+    :returns: distance
+
     """
     # calculate the distance
     return alpha/avg_grad*abs(grad-background_grad) + abs(pixel - background_pixel)
@@ -58,7 +58,7 @@ def decision(img, grad, background_pixel, background_grad):
             if len(k[k<R_scale]) >= nmbr_min:
                 foreground[z,s] = 0
             else:
-                foreground[z,s] = 255    
+                foreground[z,s] = 255
     return foreground
 # BACKGROUND_DECISION ========================================================================
 
@@ -91,18 +91,22 @@ while(cap.isOpened()):
         cv2.destroyAllWindows()
 
     last_frame = frame
-        
-    foreground = decision(frame,grad,background_pixel, background_grad) 
 
-    
+    foreground = decision(frame,grad,background_pixel, background_grad)
+
+
     cv2.imshow('foreground', foreground)
-    
-    while not cv2.waitKey(1) & 0xFF == ord('p'):
-        time.sleep(0.0001)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            cap.release()
-            cv2.destroyAllWindows()
-            break
+
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        cap.release()
+        cv2.destroyAllWindows()
+        break
+    # while not cv2.waitKey(1) & 0xFF == ord('p'):
+    #     time.sleep(0.0001)
+    #     if cv2.waitKey(1) & 0xFF == ord('q'):
+    #         cap.release()
+    #         cv2.destroyAllWindows()
+    #         break
 
     ret, frame = cap.read()
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
