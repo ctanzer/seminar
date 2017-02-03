@@ -5,9 +5,15 @@ import time
 last_frame = 0
 
 cap = cv2.VideoCapture('video_wecker.avi')
+<<<<<<< Updated upstream
 
 while(cap.isOpened()):
     ret, frame = cap.read()
+=======
+print "cap initialized"
+while(True):
+    ret = cap.grab()
+>>>>>>> Stashed changes
     if ret == False:
         cap.release()
         cv2.destroyAllWindows()
