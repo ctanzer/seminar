@@ -42,7 +42,7 @@ def gradient(image):
     :returns: gradient in x and y direction
 
     """
-    grad =  ndimage.gaussian_gradient_magnitude(image, 3)*1.
+    grad =  ndimage.gaussian_gradient_magnitude(image, 5)
     avg_grad = np.average(grad)
 
     return grad, avg_grad
@@ -51,13 +51,13 @@ def gradient(image):
 # BACKGROUND_DECISION ========================================================================
 def decision(img, grad, avg_grad, alpha, background_pixel, background_grad):
     foreback = img*0+255
+    d = distance(img, grad, avg_grad, alpha, background_pixel, background_grad)
     # for r in range(len(img)):
     #     for c in range(len(img[0])):
     #         if np.count_nonzero(d[r,c]<R_scale) > nmbr_min:
     #             foreback[r,c] = 255
     #         else:
     #             foreback[r,c] = 0
-    d = distance(img, grad, avg_grad, alpha, background_pixel, background_grad)
     comp = d<R_scale
     foreback[(comp != False).sum(2) > nmbr_min] = 0
 
@@ -80,8 +80,6 @@ background_pixel = np.uint8(np.ones((rows, cols, N)) * img[:,:,np.newaxis])
 grad, avg_grad = gradient(img)
 
 background_grad = np.ones((rows,cols,N)) * grad.reshape((rows,cols,1))
-
-# foreground = decision(img,grad,background_pixel, background_grad)
 
 foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
 
