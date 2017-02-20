@@ -57,7 +57,7 @@ def decision(img, grad, avg_grad, alpha, background_pixel, background_grad):
     foreback = img*0+255
     d = distance(img, grad, avg_grad, alpha, background_pixel, background_grad)
     d_min = np.amin(d, axis=2)
-    comp = d<R_scale
+    comp = d<R_arr[:,:,np.newaxis]
     foreback[(comp != False).sum(2) > nmbr_min] = 0
 
     return foreback
@@ -85,21 +85,37 @@ def background_update(img, foreback, background_pixel, background_grad, pixel_pr
     distance_update(n)
 # BACKGROUND_UPDATE ==========================================================================
 
-# DISTANCE_UPDATE ==========================================================================
+# DISTANCE_UPDATE ============================================================================
 def distance_update(n):
     global d_min_arr, d_min, d_min_avg, N
     # Update minimum distance array
     d_min_arr[:,:,n] = d_min
     # Calculate average minimum distances
     d_min_avg = d_min_arr.sum(2)/N
-# DISTANCE_UPDATE ==========================================================================
+# DISTANCE_UPDATE ============================================================================
 
 
 # THRESHOLD_UPDATE ===========================================================================
-# def threshold_update():
+def threshold_update():
+    global R_arr
+
+    th_update = R_arr > d_min_avg * R_scale
+
+    R_arr[th_update] *= (1 - R_inc_dec)
+    R_arr[~th_update] *= (1 + R_inc_dec)
 
 # THRESHOLD_UPDATE ===========================================================================
 
+# LEARNING_RATE_UPDATE ===========================================================================
+def learn_update():
+    global T_rate_arr
+
+    update_inc = (foreback == 1) & (T_rate_arr < T_upper)
+    update_dec = (foreback == 0) & (T_rate_arr > T_lower)
+    T_rate_arr[update_inc] += T_inc/d_min[update_inc]
+    T_rate_arr[update_dec] -= T_dec/d_min[update_dec]
+
+# LEARNING_RATE_UPDATE ===========================================================================
 
 cap = cv2.VideoCapture('video_small_converted.avi')
 ret, img = cap.read()
@@ -121,6 +137,11 @@ d_min = np.zeros((rows, cols))
 d_min_arr = np.zeros((rows, cols, N))
 d_min_avg = np.zeros((rows, cols))
 
+# R_arr = np.zeros((rows, cols))
+R_arr = np.ones((rows, cols))*R_scale
+
+T_arr = np.ones((rows,cols))*100
+
 foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
 
 while True:
@@ -132,6 +153,7 @@ while True:
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     grad, avg_grad2 = gradient(img)
     background_update(img, foreback ,background_pixel, background_grad, pixel_probabilities)
+    threshold_update()
     foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
     # foreback = cv2.medianBlur(foreback,23)
 
