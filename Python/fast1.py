@@ -140,7 +140,7 @@ d_min_avg = np.zeros((rows, cols))
 # R_arr = np.zeros((rows, cols))
 R_arr = np.ones((rows, cols))*R_scale
 
-T_arr = np.ones((rows,cols))*100
+T_rate_arr = np.ones((rows,cols))*100
 
 foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
 
