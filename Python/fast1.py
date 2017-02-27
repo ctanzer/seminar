@@ -77,6 +77,19 @@ def background_update(img, foreback, background_pixel, background_grad, pixel_pr
     # Random pixels with probability 1/T
     rand_array = 100.*np.random.random(img.shape)
     update_array = np.logical_and((pixel_probabilities > rand_array), foreback == 0)
+    # Choose adjacent pixels
+    ind_x, ind_y = np.nonzero(update_array)
+    rand_coords = [(-1,-1), (-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
+    for i in range(len(ind_x)):
+        rand_x, rand_y = rand_coords[np.uint8(np.random.rand()*8)]
+        new_x = ind_x[i]+rand_x
+        new_y = ind_y[i]+rand_y
+        if new_x < 0 or new_x >= update_array.shape[0]:
+            new_x = ind_x[i]-rand_x
+        if new_y < 0 or new_y >= update_array.shape[1]:
+            new_y = ind_y[i]-rand_y
+        update_array[new_x, new_y] = 1
+
     # Update background pixels in plane n
     background_pixel[update_array,n] = img[update_array]
     grad, avg_grad = gradient(img)
@@ -117,7 +130,7 @@ def learn_update():
 
 # LEARNING_RATE_UPDATE ===========================================================================
 
-cap = cv2.VideoCapture('video_small_converted.avi')
+cap = cv2.VideoCapture('highway.avi')
 ret, img = cap.read()
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
@@ -155,7 +168,7 @@ while True:
     background_update(img, foreback ,background_pixel, background_grad, pixel_probabilities)
     threshold_update()
     foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
-    # foreback = cv2.medianBlur(foreback,23)
+    foreback = cv2.medianBlur(foreback,23)
 
 
     cv2.imshow('foreground', foreback)
