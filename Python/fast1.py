@@ -2,21 +2,23 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy import pi
-# from scipy import ndimage
 
 # Constants
-N = 35
+N = 10
 nmbr_min = 2
 R_inc_dec = 0.05
 R_lower = 18
-R_scale = 15
-T_dec = 0.05
+R_scale = 5
+T_dec = 0.1
 T_inc = 1
 T_lower = 2
-T_upper = 200
+T_upper = 150
 alpha = 1
 
-# DISTANCE ===================================================================================
+# Variable for printing things just once
+once = 0
+
+# DISTANCE =====================================================================
 def distance(img, grad, avg_grad, alpha, background_pixel, background_grad):
     """ Returns an distance for the given pixel and gradient value
 
@@ -31,9 +33,9 @@ def distance(img, grad, avg_grad, alpha, background_pixel, background_grad):
     # calculate the distance
     return alpha/avg_grad*abs(grad[:,:,np.newaxis]-background_grad) + abs(img[:,:,np.newaxis] - background_pixel)
 
-# DISTANCE ===================================================================================
+# DISTANCE =====================================================================
 
-# GRADIENT ===================================================================================
+# GRADIENT =====================================================================
 def gradient(image):
     """ Returns the gradient in x and y direction of an picture
 
@@ -41,45 +43,38 @@ def gradient(image):
     :returns: gradient in x and y direction
 
     """
-    # grad =  ndimage.gaussian_gradient_magnitude(image, 3)
-    grad_x = cv2.Sobel(image, cv2.CV_64F, 1, 0)
-    grad_y = cv2.Sobel(image, cv2.CV_64F, 0, 1)
+    grad_x, grad_y = np.gradient(image)
     grad = cv2.magnitude(grad_x, grad_y)
     avg_grad = np.average(grad)
 
     return grad, avg_grad
-# GRADIENT ===================================================================================
+# GRADIENT =====================================================================
 
-# BACKGROUND_DECISION ========================================================================
+# BACKGROUND_DECISION ==========================================================
 def decision(img, grad, avg_grad, alpha, background_pixel, background_grad):
-    global d_min
+    global d_min, R_arr
 
-    foreback = img*0+255
+    foreback = img*0
     d = distance(img, grad, avg_grad, alpha, background_pixel, background_grad)
+    cv2.imshow('distance', np.uint8((d[:,:,9]-d[:,:,9].min())/(d[:,:,9].max()-d[:,:,9].min())*255))
     d_min = np.amin(d, axis=2)
     comp = d<R_arr[:,:,np.newaxis]
-    foreback[(comp != False).sum(2) > nmbr_min] = 0
+    foreback[(comp != False).sum(2) < nmbr_min] = 255
 
     return foreback
-# BACKGROUND_DECISION ========================================================================
+# BACKGROUND_DECISION ==========================================================
 
-# BACKGROUND_UPDATE_PROBABILITY ==============================================================
-def background_probability(platzhalter):
-    platzhalter = 1
-
-    return platzhalter
-# BACKGROUND_UPDATE_PROBABILITY ==============================================================
-
-# BACKGROUND_UPDATE ==========================================================================
-def background_update(img, foreback, background_pixel, background_grad, pixel_probabilities):
-    # Random plane
-    n = np.uint8(np.floor(35*np.random.random()))
+# BACKGROUND_UPDATE ============================================================
+def background_update(img, grad, avg_grad, foreback, background_pixel, background_grad, n):
+    global N
     # Random pixels with probability 1/T
     rand_array = 100.*np.random.random(img.shape)
-    update_array = np.logical_and((pixel_probabilities > rand_array), foreback == 0)
+    update_array = np.logical_and(((100/T_rate_arr) > rand_array), foreback == 0)
+    cv2.imshow('update_array', np.uint8(update_array)*255)
     # Choose adjacent pixels
     ind_x, ind_y = np.nonzero(update_array)
     rand_coords = [(-1,-1), (-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
+    # print 'loops: ', len(ind_x)
     for i in range(len(ind_x)):
         rand_x, rand_y = rand_coords[np.uint8(np.random.rand()*8)]
         new_x = ind_x[i]+rand_x
@@ -92,23 +87,19 @@ def background_update(img, foreback, background_pixel, background_grad, pixel_pr
 
     # Update background pixels in plane n
     background_pixel[update_array,n] = img[update_array]
-    grad, avg_grad = gradient(img)
     background_grad[update_array,n] = grad[update_array]
-    # Update minimum distance array
-    distance_update(n)
-# BACKGROUND_UPDATE ==========================================================================
+# BACKGROUND_UPDATE ============================================================
 
-# DISTANCE_UPDATE ============================================================================
+# DISTANCE_UPDATE ==============================================================
 def distance_update(n):
     global d_min_arr, d_min, d_min_avg, N
     # Update minimum distance array
     d_min_arr[:,:,n] = d_min
     # Calculate average minimum distances
     d_min_avg = d_min_arr.sum(2)/N
-# DISTANCE_UPDATE ============================================================================
+# DISTANCE_UPDATE ==============================================================
 
-
-# THRESHOLD_UPDATE ===========================================================================
+# THRESHOLD_UPDATE =============================================================
 def threshold_update():
     global R_arr
 
@@ -116,19 +107,29 @@ def threshold_update():
 
     R_arr[th_update] *= (1 - R_inc_dec)
     R_arr[~th_update] *= (1 + R_inc_dec)
+    cv2.imshow('threshold', np.uint8((R_arr-R_arr.min())/(R_arr.max()-R_arr.min())*255))
 
-# THRESHOLD_UPDATE ===========================================================================
+# THRESHOLD_UPDATE =============================================================
 
-# LEARNING_RATE_UPDATE ===========================================================================
+# LEARNING_RATE_UPDATE =========================================================
 def learn_update():
     global T_rate_arr
 
-    update_inc = (foreback == 1) & (T_rate_arr < T_upper)
-    update_dec = (foreback == 0) & (T_rate_arr > T_lower)
-    T_rate_arr[update_inc] += T_inc/d_min[update_inc]
-    T_rate_arr[update_dec] -= T_dec/d_min[update_dec]
+    update_inc = (foreback > 0)
+    update_dec = (foreback == 0)
+    T_rate_arr[update_inc & (d_min > 0)] += T_inc/d_min[update_inc & (d_min > 0)]
+    T_rate_arr[update_dec & (d_min > 0)] -= T_dec/d_min[update_dec & (d_min > 0)]
+    T_rate_arr[T_rate_arr < T_lower] = T_lower
+    T_rate_arr[T_rate_arr > T_upper] = T_upper
 
-# LEARNING_RATE_UPDATE ===========================================================================
+# LEARNING_RATE_UPDATE =========================================================
+
+# PROBABILITY_UPDATE ===========================================================
+def probability_update():
+    global pixel_probabilities, T_rate_arr, once
+
+    pixel_probabilities = 1/T_rate_arr
+# PROBABILITY_UPDATE ===========================================================
 
 cap = cv2.VideoCapture('highway.avi')
 ret, img = cap.read()
@@ -144,9 +145,10 @@ background_pixel = np.uint8(np.ones((rows, cols, N)) * img[:,:,np.newaxis])
 grad, avg_grad = gradient(img)
 
 
-background_grad = np.ones((rows,cols,N)) * grad.reshape((rows,cols,1))
+# background_grad = np.ones((rows,cols,N)) * grad.reshape((rows,cols,1))
+background_grad = np.ones((rows,cols,N)) * grad[:,:,np.newaxis]
 
-d_min = np.zeros((rows, cols))
+d_min = np.ones((rows, cols))
 d_min_arr = np.zeros((rows, cols, N))
 d_min_avg = np.zeros((rows, cols))
 
@@ -160,19 +162,35 @@ foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_gra
 while True:
     ret, img = cap.read()
     if ret == False:
-        cap.release()
-        cv2.destroyAllWindows()
         break
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    grad, avg_grad2 = gradient(img)
-    background_update(img, foreback ,background_pixel, background_grad, pixel_probabilities)
+
+
+    # Random plane
+    n = np.uint8(np.floor(N*np.random.random()))
+    # Update minimum distance array
+    distance_update(n)
+    # Update decision threshold
     threshold_update()
+    # Update learning rate
+    learn_update()
+    # Update pixel probability
+    # probability_update()
+    # Update background model
+    background_update(img, grad, avg_grad, foreback ,background_pixel, background_grad, n)
+
+    grad, avg_grad = gradient(img)
     foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
-    foreback = cv2.medianBlur(foreback,23)
+    foreback = cv2.medianBlur(foreback,15)
 
-
+    cv2.imshow('orig', img)
     cv2.imshow('foreground', foreback)
+    # cv2.imshow('Learnrate', np.uint8((T_rate_arr-2)/198*255))
+    # cv2.imshow('grad', np.uint8((grad-grad.min())/(grad.max()-grad.min())*255))
+    # cv2.imshow('backgrad0', np.uint8(background_grad[:,:,0]))
+    # cv2.imshow('backgrad5', np.uint8(background_grad[:,:,5]))
     if cv2.waitKey(10) & 0xFF == ord('q'):
-        cap.release()
-        cv2.destroyAllWindows()
         break
+
+cap.release()
+cv2.destroyAllWindows()
