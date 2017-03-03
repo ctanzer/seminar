@@ -5,6 +5,7 @@ from numpy import pi
 
 # Constants
 T_d = 10
+T_r = 10
 grid = np.array([(1, 0, 1, 0, 2),(0, 1, 1, 1, 0),(1, 1, 0, 1, 1,),(0, 1, 1, 1, 0),(3, 0, 1, 0, 4)])
 N = 16
 nmbr_min = 12
@@ -49,7 +50,8 @@ def update_background_pictures(img, background_pictures, rows, cols):
 def lbsp(img, background_pictures):
     background_decision = background_pictures - img[:,:,np.newaxis]
     foreback = img*0
-    comp = background_decision<T_d
+    T = T_r * img
+    comp = background_decision<T_r
     foreback[(comp != False).sum(2) < nmbr_min] = 255
     return foreback
 # LBSP-BACKGROUND DECISION =================================================================
