@@ -4,11 +4,11 @@ import numpy as np
 from numpy import pi
 
 # Constants
-T_d = 10
 T_r = 0.3
 grid = np.array([(1, 0, 1, 0, 2),(0, 1, 1, 1, 0),(1, 1, 0, 1, 1,),(0, 1, 1, 1, 0),(3, 0, 1, 0, 4)])
 N = 16
 nmbr_min = 12
+MAX_hamming_weight = 0
 
 # LBSP-UPDATE BACKGROUND PICTURES ==========================================================
 def update_background_pictures(img, background_pictures, rows, cols):
@@ -48,27 +48,35 @@ def update_background_pictures(img, background_pictures, rows, cols):
 
 # LBSP-BACKGROUND DECISION =================================================================
 def lbsp(img, background_pictures):
+    global T_r
     background_decision = background_pictures - img[:,:,np.newaxis]
     foreback = img*0
     T = T_r * img
     comp = background_decision<T[:,:,np.newaxis]
     foreback[(comp != False).sum(2) < nmbr_min] = 255
+    
+    # T_r update ------ Grenzen noch anpassen, eventuell auch Geschwindigkeit der Aenderung
+    hammingweight=comp.sum()*1.0/MAX_hamming_weight
+    if(T_r > 0.1 and T_r < 1):
+        if(hammingweight < 0.865):
+            T_r = T_r + 0.001
+        if(hammingweight > 0.875):
+            T_r = T_r - 0.001
+        
     return foreback
 # LBSP-BACKGROUND DECISION =================================================================
 
 
-cap = cv2.VideoCapture('highway.avi')
+cap = cv2.VideoCapture('snow.avi')
 ret, img = cap.read()
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 rows, cols = img.shape
+
+MAX_hamming_weight = rows*cols*N
+
 background_pictures = np.ones((rows,cols,N))*255;
 update_background_pictures(img, background_pictures, rows, cols)
-print(background_pictures[:,:,0])
-
-#imgplot = plt.imshow(background_pictures[:,:,0], 'gray')
-#plt.ylabel('one of the background pictures')
-#plt.show()
 
 while True:
     ret, img = cap.read()
