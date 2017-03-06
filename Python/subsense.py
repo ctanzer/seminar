@@ -5,10 +5,15 @@ from numpy import pi
 
 # Constants
 T_r = 0.3
-grid = np.array([(1, 0, 1, 0, 2),(0, 1, 1, 1, 0),(1, 1, 0, 1, 1,),(0, 1, 1, 1, 0),(3, 0, 1, 0, 4)])
-N = 16
-nmbr_min = 12
+N_grad = 16
+nmbr_min_grad = 12
 MAX_hamming_weight = 0
+
+N_back = 50
+nmbr_min_back = 2
+R = 10
+
+T_update = 2
 
 # LBSP-UPDATE GRADIENT PICTURES ==========================================================
 def update_gradient_pictures(img, gradient_pictures, rows, cols):
@@ -53,7 +58,7 @@ def lbsp(img, gradient_pictures):
     gradient = img*0
     T = T_r * img
     comp = gradient_decision<T[:,:,np.newaxis]
-    gradient[(comp != False).sum(2) < nmbr_min] = 255
+    gradient[(comp != False).sum(2) < nmbr_min_grad] = 255
     
     # T_r update ------ Grenzen noch anpassen, eventuell auch Geschwindigkeit der Aenderung
     hammingweight=comp.sum()*1.0/MAX_hamming_weight
@@ -66,6 +71,24 @@ def lbsp(img, gradient_pictures):
     return gradient
 # LBSP-GRADIENT DECISION =================================================================
 
+# BACKGROUND DECISION ====================================================================
+def decision(img,background_pictures):
+    background = img*0
+    comp = (img[:,:,np.newaxis] - background_pictures) < R
+    background[(comp != False).sum(2) <= nmbr_min_back] = 255;
+    return background
+# BACKGROUND DECISION ====================================================================
+
+# BACKGROUND_UPDATE ======================================================================
+def background_update(img, background, background_pictures):
+    n = np.uint8(np.floor(N_back*np.random.random()))
+    # Random pixels with probability 1/T
+    rand_array = 100.*np.random.random(img.shape)
+    update_array = np.logical_and(((100/T_update) > rand_array), background == 0)
+    cv2.imshow('update_array', np.uint8(update_array)*255)
+     # Update background pictures in plane n
+    background_pictures[update_array,n] = img[update_array]
+# BACKGROUND_UPDATE ======================================================================
 
 cap = cv2.VideoCapture('highway.avi')
 ret, img = cap.read()
@@ -73,10 +96,13 @@ img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
 rows, cols = img.shape
 
-MAX_hamming_weight = rows*cols*N
+MAX_hamming_weight = rows*cols*N_grad
 
-gradient_pictures = np.ones((rows,cols,N))*255;
+gradient_pictures = np.ones((rows,cols,N_grad))*255;
 update_gradient_pictures(img, gradient_pictures, rows, cols)
+
+background_pictures = np.uint8(np.ones((rows, cols, N_back)) * img[:,:,np.newaxis])
+background = decision(img, background_pictures)
 
 while True:
     ret, img = cap.read()
@@ -85,7 +111,12 @@ while True:
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     update_gradient_pictures(img, gradient_pictures, rows, cols)
     gradient = lbsp(img, gradient_pictures)
-    cv2.imshow('original',gradient)
+    background_update(img, background, background_pictures)
+    background = decision(img, background_pictures)
+
+    cv2.imshow('gradient',gradient)
+    cv2.imshow('original',img)
+    cv2.imshow('background',background)
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
 
