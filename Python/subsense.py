@@ -5,7 +5,7 @@ from numpy import pi
 
 # Constants
 T_r = 0.3
-N_grad = 16
+N_grid = 16
 nmbr_min_grad = 12
 MAX_hamming_weight = 0
 
@@ -15,8 +15,11 @@ R = 10
 
 T_update = 2
 
+alpha = 0.03
+
+
 # LBSP-UPDATE GRADIENT PICTURES ==========================================================
-def update_gradient_pictures(img, gradient_pictures, rows, cols):
+def update_grid_pictures(img, gradient_pictures, rows, cols):
     #    0    x   1   x   2
     #    x    3   4   5   x 
     #    6    7   x   8   9
@@ -49,17 +52,19 @@ def update_gradient_pictures(img, gradient_pictures, rows, cols):
     gradient_pictures[2:rows,:cols,14]    = img[:rows-2,:cols]
     gradient_pictures[2:rows,2:cols,15]   = img[:rows-2,:cols-2]
 
+    return gradient_pictures
 # LBSP-UPDATE GRADIENT PICTURES ==========================================================
 
 # LBSP-GRADIENT DECISION =================================================================
 def lbsp(img, gradient_pictures):
-    global T_r
+    global T_r#,d_min_new
     gradient_decision = gradient_pictures - img[:,:,np.newaxis]
     gradient = img*0
     T = T_r * img
     comp = gradient_decision<T[:,:,np.newaxis]
     gradient[(comp != False).sum(2) < nmbr_min_grad] = 255
-    
+   
+    #d_min_new = np.absolute(np.amin(gradient_decision, axis=2)/255.0)
     # T_r update ------ Grenzen noch anpassen, eventuell auch Geschwindigkeit der Aenderung
     hammingweight=comp.sum()*1.0/MAX_hamming_weight
     if(T_r > 0.1 and T_r < 1):
@@ -74,7 +79,7 @@ def lbsp(img, gradient_pictures):
 # BACKGROUND DECISION ====================================================================
 def decision(img,background_pictures):
     background = img*0
-    comp = (img[:,:,np.newaxis] - background_pictures) < R
+    comp = np.absolute(img[:,:,np.newaxis] - background_pictures) < R
     background[(comp != False).sum(2) <= nmbr_min_back] = 255;
     return background
 # BACKGROUND DECISION ====================================================================
@@ -90,29 +95,52 @@ def background_update(img, background, background_pictures):
     background_pictures[update_array,n] = img[update_array]
 # BACKGROUND_UPDATE ======================================================================
 
+# DISTANCE_UPDATE ========================================================================
+def distance_update(img, background_pictures, rows, cols):
+    global d_min_arr, d_min_new
+    # Get the new minimum distance array
+    d_min_new = np.amin((np.absolute(img[:,:,np.newaxis] - background_pictures)), axis = 2)/255.0
+ 
+    d_min_arr = d_min_arr*(1-alpha) + d_min_new * alpha
+
+    d_min_arr[d_min_arr < 0] = 0
+    d_min_arr[d_min_arr > 1] = 1
+# DISTANCE_UPDATE ========================================================================
+
+# PROGRAM ######################################################################################
 cap = cv2.VideoCapture('highway.avi')
 ret, img = cap.read()
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
 rows, cols = img.shape
 
-MAX_hamming_weight = rows*cols*N_grad
+MAX_hamming_weight = rows*cols*N_grid
 
-gradient_pictures = np.ones((rows,cols,N_grad))*255;
-update_gradient_pictures(img, gradient_pictures, rows, cols)
+gradient_pictures = np.ones((rows,cols,N_grid))*255
+update_grid_pictures(img, gradient_pictures, rows, cols)
+
+d_min_new = img*255
+d_min_arr = np.ones((rows, cols))
 
 background_pictures = np.uint8(np.ones((rows, cols, N_back)) * img[:,:,np.newaxis])
 background = decision(img, background_pictures)
+
 
 while True:
     ret, img = cap.read()
     if ret == False:
         break
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    update_gradient_pictures(img, gradient_pictures, rows, cols)
+    update_grid_pictures(img, gradient_pictures, rows, cols)
     gradient = lbsp(img, gradient_pictures)
     background_update(img, background, background_pictures)
     background = decision(img, background_pictures)
+    distance_update(img, background_pictures, rows, cols)
+
+
+    blured = cv2.medianBlur(background, 9)
+    cv2.imshow('blured', blured)
+    cv2.imshow('distance',np.uint8(d_min_arr*255))
+    cv2.imshow('distance new',np.uint8(d_min_new*255))
 
     cv2.imshow('gradient',gradient)
     cv2.imshow('original',img)
@@ -122,3 +150,6 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+# PROGRAM ######################################################################################
+
+
