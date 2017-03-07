@@ -12,11 +12,17 @@ MAX_hamming_weight = 0
 N_back = 50
 nmbr_min_back = 2
 R = 10
+R_color = 30
+R_lbsp = 3
 
-T_update = 2
+T = 2
+T_lower = 2
+T_upper = 256
 
 alpha = 0.03
 
+v_incr = 1
+v_decr = 0.1
 
 # LBSP-UPDATE GRADIENT PICTURES ==========================================================
 def update_grid_pictures(img, gradient_pictures, rows, cols):
@@ -89,7 +95,7 @@ def background_update(img, background, background_pictures):
     n = np.uint8(np.floor(N_back*np.random.random()))
     # Random pixels with probability 1/T
     rand_array = 100.*np.random.random(img.shape)
-    update_array = np.logical_and(((100/T_update) > rand_array), background == 0)
+    update_array = np.logical_and(((100/T) > rand_array), background == 0)
     cv2.imshow('update_array', np.uint8(update_array)*255)
      # Update background pictures in plane n
     background_pictures[update_array,n] = img[update_array]
@@ -102,10 +108,63 @@ def distance_update(img, background_pictures, rows, cols):
     d_min_new = np.amin((np.absolute(img[:,:,np.newaxis] - background_pictures)), axis = 2)/255.0
  
     d_min_arr = d_min_arr*(1-alpha) + d_min_new * alpha
-
+    # bound it from 0 to 1
     d_min_arr[d_min_arr < 0] = 0
     d_min_arr[d_min_arr > 1] = 1
 # DISTANCE_UPDATE ========================================================================
+
+# BLINKING PIXELS ========================================================================
+def recognize_blinking_pixels(background,blured):
+    global old_background, v_arr
+    # Find blinking pixels
+    blinking_pixels = (background ^ old_background)/255
+    old_background = background
+    # Increment or Decrement the v_arr, which shows how dynamic the region is
+    v_arr[blinking_pixels == 1] = v_arr[blinking_pixels == 1] + v_incr
+    v_arr[blinking_pixels == 0] = v_arr[blinking_pixels == 0] - v_decr
+    # v_arr must be greater than zero and should be zero for foreground
+    v_arr[v_arr < 0] = 0
+    v_arr[blured == 255] = 0
+    cv2.imshow('v',np.uint8(v_arr))    
+# BLINKING PIXELS ========================================================================
+
+# THRESHOLD UPDATE =======================================================================
+def threshold_update(v_arr, d_min_arr):
+    global R_arr, R_color_arr, R_lbsp_arr
+    incr = (R_arr < np.square(1+2*d_min_arr))
+    R_arr[incr] = R_arr[incr] + v_arr[incr]
+    decr = (incr == False) & (v_arr != 0)
+    R_arr[decr] = R_arr[decr] - (1/v_arr[decr])
+    R_arr[R_arr < 1] = 1
+    R_arr[(incr | decr) == False] = 1
+    cv2.imshow('R', np.uint8(R_arr*10))
+
+    R_color_arr = R_arr * R_color
+    R_lbsp_arr = np.power(2, R_arr) + R_lbsp
+    cv2.imshow('R color', np.uint8(R_color_arr))
+    cv2.imshow('R lbsp', np.uint8(R_lbsp_arr))
+
+# THRESHOLD UPDATE =======================================================================
+
+# PROBABILITY_UPDATE =====================================================================
+def probability_update(background, v_arr, d_min_arr):
+    global T_arr
+    incr = (v_arr != 0) & (d_min_arr != 0) & (background != 0)
+    T_arr[incr] = T_arr[incr] + (1/(v_arr[incr] * d_min_arr[incr]))
+    maxi = ((v_arr == 0) | (d_min_arr == 0)) & (background != 0)
+    T_arr[maxi] = 255
+    
+    decr = (d_min_arr != 0) & (background == 0)
+    T_arr[decr] = T_arr[decr] - (v_arr[decr]/d_min_arr[decr])
+    mini = (d_min_arr == 0) & (background == 0)
+    T_arr[mini] = 2
+
+    T_arr[T_arr < 2] = 2
+    T_arr[T_arr > 255] = 255
+
+    cv2.imshow('T_arr', np.uint8(T_arr))
+
+# PROBABILITY_UPDATE =====================================================================
 
 # PROGRAM ######################################################################################
 cap = cv2.VideoCapture('highway.avi')
@@ -123,7 +182,15 @@ d_min_arr = np.ones((rows, cols))
 
 background_pictures = np.uint8(np.ones((rows, cols, N_back)) * img[:,:,np.newaxis])
 background = decision(img, background_pictures)
+old_background = background
+v_arr = img*0.0
+blured = cv2.medianBlur(background, 9)
 
+R_arr = np.ones((rows, cols))
+R_color_arr = R_arr
+R_lbsp_arr = R_arr
+
+T_arr = np.ones((rows, cols)) * 2
 
 while True:
     ret, img = cap.read()
@@ -135,7 +202,9 @@ while True:
     background_update(img, background, background_pictures)
     background = decision(img, background_pictures)
     distance_update(img, background_pictures, rows, cols)
-
+    recognize_blinking_pixels(background,blured)
+    threshold_update(v_arr, d_min_arr)
+    probability_update(background, v_arr, d_min_arr)
 
     blured = cv2.medianBlur(background, 9)
     cv2.imshow('blured', blured)
