@@ -15,7 +15,7 @@ R = 10
 R_color = 30
 R_lbsp = 3
 
-T = 2
+T_update = 2
 T_lower = 2
 T_upper = 256
 
@@ -83,19 +83,19 @@ def lbsp(img, gradient_pictures):
 # LBSP-GRADIENT DECISION =================================================================
 
 # BACKGROUND DECISION ====================================================================
-def decision(img,background_pictures):
+def decision(img,background_pictures, R_color_arr):
     background = img*0
-    comp = np.absolute(img[:,:,np.newaxis] - background_pictures) < R
+    comp = np.absolute(img[:,:,np.newaxis] - background_pictures) < R_color_arr[:,:,np.newaxis]
     background[(comp != False).sum(2) <= nmbr_min_back] = 255;
     return background
 # BACKGROUND DECISION ====================================================================
 
 # BACKGROUND_UPDATE ======================================================================
-def background_update(img, background, background_pictures):
+def background_update(img, background, background_pictures, T_arr):
     n = np.uint8(np.floor(N_back*np.random.random()))
-    # Random pixels with probability 1/T
+    # Random pixels with probability 1/T_arr
     rand_array = 100.*np.random.random(img.shape)
-    update_array = np.logical_and(((100/T) > rand_array), background == 0)
+    update_array = np.logical_and(((100/T_arr) > rand_array), background == 0)
     cv2.imshow('update_array', np.uint8(update_array)*255)
      # Update background pictures in plane n
     background_pictures[update_array,n] = img[update_array]
@@ -152,17 +152,17 @@ def probability_update(background, v_arr, d_min_arr):
     incr = (v_arr != 0) & (d_min_arr != 0) & (background != 0)
     T_arr[incr] = T_arr[incr] + (1/(v_arr[incr] * d_min_arr[incr]))
     maxi = ((v_arr == 0) | (d_min_arr == 0)) & (background != 0)
-    T_arr[maxi] = 255
+    T_arr[maxi] = T_upper
     
     decr = (d_min_arr != 0) & (background == 0)
     T_arr[decr] = T_arr[decr] - (v_arr[decr]/d_min_arr[decr])
     mini = (d_min_arr == 0) & (background == 0)
-    T_arr[mini] = 2
+    T_arr[mini] = T_lower
 
-    T_arr[T_arr < 2] = 2
-    T_arr[T_arr > 255] = 255
+    T_arr[T_arr < 2] = T_lower
+    T_arr[T_arr > 256] = T_upper
 
-    cv2.imshow('T_arr', np.uint8(T_arr))
+    cv2.imshow('T_arr', np.uint8(T_arr-1))
 
 # PROBABILITY_UPDATE =====================================================================
 
@@ -180,17 +180,22 @@ update_grid_pictures(img, gradient_pictures, rows, cols)
 d_min_new = img*255
 d_min_arr = np.ones((rows, cols))
 
-background_pictures = np.uint8(np.ones((rows, cols, N_back)) * img[:,:,np.newaxis])
-background = decision(img, background_pictures)
-old_background = background
-v_arr = img*0.0
-blured = cv2.medianBlur(background, 9)
-
 R_arr = np.ones((rows, cols))
 R_color_arr = R_arr
 R_lbsp_arr = R_arr
 
 T_arr = np.ones((rows, cols)) * 2
+
+v_arr = img*0.0
+
+threshold_update(v_arr, d_min_arr)
+
+background_pictures = np.uint8(np.ones((rows, cols, N_back)) * img[:,:,np.newaxis])
+background = decision(img, background_pictures, R_color_arr)
+old_background = background
+blured = cv2.medianBlur(background, 9)
+
+
 
 while True:
     ret, img = cap.read()
@@ -199,8 +204,8 @@ while True:
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     update_grid_pictures(img, gradient_pictures, rows, cols)
     gradient = lbsp(img, gradient_pictures)
-    background_update(img, background, background_pictures)
-    background = decision(img, background_pictures)
+    background_update(img, background, background_pictures, T_arr)
+    background = decision(img, background_pictures, R_color_arr)
     distance_update(img, background_pictures, rows, cols)
     recognize_blinking_pixels(background,blured)
     threshold_update(v_arr, d_min_arr)
