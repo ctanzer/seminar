@@ -15,8 +15,8 @@ T_lower = 2
 T_upper = 150
 alpha = 1
 
-# Variable for printing things just once
-once = 0
+# Variable for checking initialization
+init = 0
 
 # DISTANCE =====================================================================
 def distance(img, grad, avg_grad, alpha, background_pixel, background_grad):
@@ -131,66 +131,72 @@ def probability_update():
     pixel_probabilities = 1/T_rate_arr
 # PROBABILITY_UPDATE ===========================================================
 
+################################################################################
+# PBAS - Main function =========================================================
+def pbas(image):
+    pbas.init
+    if pbas.init == 0:
+        pbas.init = 1
+
+        pbas.rows, pbas.cols = image.shape
+        pbas.foreback = np.zeros((rows,cols))
+        pbas.grad, pbas.avg_grad = gradient(image)
+
+        pbas.pixel_probabilities = np.ones(image.shape) * 50
+
+        pbas.background_pixel = np.uint8(np.ones((rows, cols, N)) * img[:,:,np.newaxis])
+        pbas.background_grad = np.ones((rows,cols,N)) * grad[:,:,np.newaxis]
+
+        pbas.d_min = np.ones((rows, cols))
+        pbas.d_min_arr = np.zeros((rows, cols, N))
+        pbas.d_min_avg = np.zeros((rows, cols))
+
+        # R_arr = np.zeros((rows, cols))
+        pbas.R_arr = np.ones((rows, cols))*R_scale
+
+        pbas.T_rate_arr = np.ones((rows,cols))*100
+
+    foreback = decision(image, grad, avg_grad, alpha, background_pixel, background_grad)
+
+    return foreback
+# PBAS - Main function =========================================================
+################################################################################
+
 cap = cv2.VideoCapture('highway.avi')
 ret, img = cap.read()
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-pixel_probabilities = np.ones(img.shape) * 50
 
-rows, cols = img.shape
+if __name__ == '__main__':
+    while True:
+        ret, img = cap.read()
+        if ret == False:
+            break
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-foreback = np.zeros((rows,cols))
+        # Random plane
+        n = np.uint8(np.floor(N*np.random.random()))
+        # Update minimum distance array
+        distance_update(n)
+        # Update decision threshold
+        threshold_update()
+        # Update learning rate
+        learn_update()
+        # Update pixel probability
+        # probability_update()
+        # Update background model
+        background_update(img, grad, avg_grad, foreback ,background_pixel, background_grad, n)
 
-background_pixel = np.uint8(np.ones((rows, cols, N)) * img[:,:,np.newaxis])
-grad, avg_grad = gradient(img)
+        grad, avg_grad = gradient(img)
+        foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
+        foreback = cv2.medianBlur(foreback,15)
 
+        cv2.imshow('orig', img)
+        cv2.imshow('foreground', foreback)
+        # cv2.imshow('backgrad0', np.uint8(background_grad[:,:,0]))
+        # cv2.imshow('backgrad5', np.uint8(background_grad[:,:,5]))
+        if cv2.waitKey(10) & 0xFF == ord('q'):
+            break
 
-# background_grad = np.ones((rows,cols,N)) * grad.reshape((rows,cols,1))
-background_grad = np.ones((rows,cols,N)) * grad[:,:,np.newaxis]
-
-d_min = np.ones((rows, cols))
-d_min_arr = np.zeros((rows, cols, N))
-d_min_avg = np.zeros((rows, cols))
-
-# R_arr = np.zeros((rows, cols))
-R_arr = np.ones((rows, cols))*R_scale
-
-T_rate_arr = np.ones((rows,cols))*100
-
-foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
-
-while True:
-    ret, img = cap.read()
-    if ret == False:
-        break
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-
-    # Random plane
-    n = np.uint8(np.floor(N*np.random.random()))
-    # Update minimum distance array
-    distance_update(n)
-    # Update decision threshold
-    threshold_update()
-    # Update learning rate
-    learn_update()
-    # Update pixel probability
-    # probability_update()
-    # Update background model
-    background_update(img, grad, avg_grad, foreback ,background_pixel, background_grad, n)
-
-    grad, avg_grad = gradient(img)
-    foreback = decision(img, grad, avg_grad, alpha, background_pixel, background_grad)
-    foreback = cv2.medianBlur(foreback,15)
-
-    cv2.imshow('orig', img)
-    cv2.imshow('foreground', foreback)
-    # cv2.imshow('Learnrate', np.uint8((T_rate_arr-2)/198*255))
-    # cv2.imshow('grad', np.uint8((grad-grad.min())/(grad.max()-grad.min())*255))
-    # cv2.imshow('backgrad0', np.uint8(background_grad[:,:,0]))
-    # cv2.imshow('backgrad5', np.uint8(background_grad[:,:,5]))
-    if cv2.waitKey(10) & 0xFF == ord('q'):
-        break
-
-cap.release()
-cv2.destroyAllWindows()
+    cap.release()
+    cv2.destroyAllWindows()
