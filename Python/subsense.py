@@ -2,6 +2,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 from numpy import pi
+import time
 
 # Constants
 T_r = 0.3
@@ -9,9 +10,12 @@ N_grid = 16
 nmbr_min_grad = 12
 MAX_hamming_weight = 0
 
-N_back = 50
+N_back = 100
 nmbr_min_back = 2
 R = 10
+# pan
+#R_color =50
+#normal
 R_color = 30
 R_lbsp = 3
 
@@ -19,10 +23,14 @@ T_update = 2
 T_lower = 2
 T_upper = 256
 
+# pan
+#alpha = 0.01
+#normal
 alpha = 0.03
-
 v_incr = 1
 v_decr = 0.1
+
+downsample = 0.8
 
 # LBSP-UPDATE GRADIENT PICTURES ==========================================================
 def update_grid_pictures(img, gradient_pictures, rows, cols):
@@ -96,9 +104,22 @@ def background_update(img, background, background_pictures, T_arr):
     # Random pixels with probability 1/T_arr
     rand_array = 100.*np.random.random(img.shape)
     update_array = np.logical_and(((100/T_arr) > rand_array), background == 0)
-    cv2.imshow('update_array', np.uint8(update_array)*255)
-     # Update background pictures in plane n
+    # Choose adjacent pixels
+    ind_x, ind_y = np.nonzero(update_array)
+    rand_coords = [(-1,-1), (-1,0),(-1,1),(0,-1),(0,1),(1,-1),(1,0),(1,1)]
+    # print 'loops: ', len(ind_x)
+    for i in range(len(ind_x)):
+        rand_x, rand_y = rand_coords[np.uint8(np.random.rand()*8)]
+        new_x = ind_x[i]+rand_x
+        new_y = ind_y[i]+rand_y
+        if new_x < 0 or new_x >= update_array.shape[0]:
+            new_x = ind_x[i]-rand_x
+        if new_y < 0 or new_y >= update_array.shape[1]:
+            new_y = ind_y[i]-rand_y
+        update_array[new_x, new_y] = True
+    # Update background pictures in plane n
     background_pictures[update_array,n] = img[update_array]
+    cv2.imshow('update_array', np.uint8(update_array)*255)
 # BACKGROUND_UPDATE ======================================================================
 
 # DISTANCE_UPDATE ========================================================================
@@ -168,8 +189,11 @@ def probability_update(background, v_arr, d_min_arr):
 
 # PROGRAM ######################################################################################
 cap = cv2.VideoCapture('highway.avi')
+print(cap.get(cv2.cv.CV_CAP_PROP_FPS))
 ret, img = cap.read()
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+img = cv2.resize(img,None,fx=downsample, fy=downsample, interpolation = cv2.INTER_CUBIC)
+
 rows, cols = img.shape
 
 MAX_hamming_weight = rows*cols*N_grid
@@ -198,20 +222,26 @@ blured = cv2.medianBlur(background, 9)
 
 
 while True:
+    # Start time
+    start = time.time()
+
     ret, img = cap.read()
     if ret == False:
         break
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = cv2.resize(img,None,fx=downsample, fy=downsample, interpolation = cv2.INTER_CUBIC)
+
     update_grid_pictures(img, gradient_pictures, rows, cols)
     gradient = lbsp(img, gradient_pictures)
     background_update(img, background, background_pictures, T_arr)
     background = decision(img, background_pictures, R_color_arr)
+    blured = cv2.medianBlur(background, 5)
+    
     distance_update(img, background_pictures, rows, cols)
     recognize_blinking_pixels(background,blured)
     threshold_update(v_arr, d_min_arr)
     probability_update(background, v_arr, d_min_arr)
 
-    blured = cv2.medianBlur(background, 9)
     cv2.imshow('blured', blured)
     cv2.imshow('distance',np.uint8(d_min_arr*255))
     cv2.imshow('distance new',np.uint8(d_min_new*255))
@@ -219,9 +249,16 @@ while True:
     cv2.imshow('gradient',gradient)
     cv2.imshow('original',img)
     cv2.imshow('background',background)
+   
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
-
+    # End time
+    end = time.time()
+    # Time elapsed
+    seconds = end - start
+    # Calculate frames per second
+    fps  = 1 / seconds;
+    print "Estimated frames per second : {0}".format(fps);
 cap.release()
 cv2.destroyAllWindows()
 # PROGRAM ######################################################################################
