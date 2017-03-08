@@ -249,7 +249,7 @@ if __name__ == '__main__':
         pbas_g.join()
         pbas_b.join()
 
-        foreground = np.logical_and(np.logical_and(pbas_r.foreground, pbas_g.foreground), pbas_b.foreground) * 1.
+        foreground = np.logical_or(np.logical_or(pbas_r.foreground, pbas_g.foreground), pbas_b.foreground) * 1.
 
         cv2.imshow('orig', img)
         cv2.imshow('foreground', foreground)
