@@ -5,12 +5,12 @@ from numpy import pi
 import time
 
 # Constants
-T_r = 0.3
+T_r = 0.003
 N_grid = 16
-nmbr_min_grad = 12
+nmbr_min_lbsp = 12
 MAX_hamming_weight = 0
 
-N_back = 100
+N_back = 50
 nmbr_min_back = 2
 R = 10
 # pan
@@ -30,10 +30,10 @@ alpha = 0.03
 v_incr = 1
 v_decr = 0.1
 
-downsample = 0.8
+downsample = 0.7
 
-# LBSP-UPDATE GRADIENT PICTURES ==========================================================
-def update_grid_pictures(img, gradient_pictures, rows, cols):
+# LBSP-UPDATE GRID PICTURES ==========================================================
+def update_grid_pictures(img, grid_pictures, rows, cols):
     #    0    x   1   x   2
     #    x    3   4   5   x 
     #    6    7   x   8   9
@@ -41,65 +41,60 @@ def update_grid_pictures(img, gradient_pictures, rows, cols):
     #   13    x  14   x   15
     
     # First row
-    gradient_pictures[:rows-2,:cols-2,0]  = img[2:rows,2:cols]
-    gradient_pictures[:rows-2,:cols,1]    = img[2:rows,:cols]
-    gradient_pictures[:rows-2,2:cols,2]   = img[2:rows,:cols-2]
+    grid_pictures[:rows-2,:cols-2,0]  = img[2:rows,2:cols]
+    grid_pictures[:rows-2,:cols,1]    = img[2:rows,:cols]
+    grid_pictures[:rows-2,2:cols,2]   = img[2:rows,:cols-2]
 
     # Second row
-    gradient_pictures[:rows-1,:cols-1,3]  = img[1:rows,1:cols]
-    gradient_pictures[:rows-1,:cols,4]    = img[1:rows,:cols]
-    gradient_pictures[:rows-1,1:cols,5]   = img[1:rows,:cols-1]
+    grid_pictures[:rows-1,:cols-1,3]  = img[1:rows,1:cols]
+    grid_pictures[:rows-1,:cols,4]    = img[1:rows,:cols]
+    grid_pictures[:rows-1,1:cols,5]   = img[1:rows,:cols-1]
 
     # Third row
-    gradient_pictures[:rows,:cols-2,6]    = img[:rows,2:cols]
-    gradient_pictures[:rows,:cols-1,7]    = img[:rows,1:cols]
-    gradient_pictures[:rows,1:cols,8]     = img[:rows,:cols-1]
-    gradient_pictures[:rows,2:cols,9]     = img[:rows,:cols-2]
+    grid_pictures[:rows,:cols-2,6]    = img[:rows,2:cols]
+    grid_pictures[:rows,:cols-1,7]    = img[:rows,1:cols]
+    grid_pictures[:rows,1:cols,8]     = img[:rows,:cols-1]
+    grid_pictures[:rows,2:cols,9]     = img[:rows,:cols-2]
 
     # Fourth row
-    gradient_pictures[1:rows,:cols-1,10]  = img[:rows-1,1:cols]
-    gradient_pictures[1:rows,:cols,11]    = img[:rows-1,:cols]
-    gradient_pictures[1:rows,1:cols,12]   = img[:rows-1,:cols-1]
+    grid_pictures[1:rows,:cols-1,10]  = img[:rows-1,1:cols]
+    grid_pictures[1:rows,:cols,11]    = img[:rows-1,:cols]
+    grid_pictures[1:rows,1:cols,12]   = img[:rows-1,:cols-1]
 
     # Fifth row
-    gradient_pictures[2:rows,:cols-2,13]  = img[:rows-2,2:cols]
-    gradient_pictures[2:rows,:cols,14]    = img[:rows-2,:cols]
-    gradient_pictures[2:rows,2:cols,15]   = img[:rows-2,:cols-2]
+    grid_pictures[2:rows,:cols-2,13]  = img[:rows-2,2:cols]
+    grid_pictures[2:rows,:cols,14]    = img[:rows-2,:cols]
+    grid_pictures[2:rows,2:cols,15]   = img[:rows-2,:cols-2]
 
-    return gradient_pictures
-# LBSP-UPDATE GRADIENT PICTURES ==========================================================
+    return grid_pictures
+# LBSP-UPDATE GRID PICTURES ==========================================================
 
-# LBSP-GRADIENT DECISION =================================================================
-def lbsp(img, gradient_pictures):
-    global T_r#,d_min_new
-    gradient_decision = gradient_pictures - img[:,:,np.newaxis]
-    gradient = img*0
+# LBSP DECISION =================================================================
+def lbsp(img, grid_pictures, background_pictures, lbsp_background_model):
+    global T_r, R_lbsp_arr
+    grid_decision = grid_pictures - img[:,:,np.newaxis]
+    lbsp_decision = img*0+255
     T = T_r * img
-    comp = gradient_decision<T[:,:,np.newaxis]
-    gradient[(comp != False).sum(2) < nmbr_min_grad] = 255
-   
-    #d_min_new = np.absolute(np.amin(gradient_decision, axis=2)/255.0)
-    # T_r update ------ Grenzen noch anpassen, eventuell auch Geschwindigkeit der Aenderung
-    hammingweight=comp.sum()*1.0/MAX_hamming_weight
-    if(T_r > 0.1 and T_r < 1):
-        if(hammingweight < 0.865):
-            T_r = T_r + 0.001
-        if(hammingweight > 0.875):
-            T_r = T_r - 0.001
-        
-    return gradient
-# LBSP-GRADIENT DECISION =================================================================
+    actual_bin = grid_decision<T[:,:,np.newaxis]
+    bin_comp = (lbsp_background_model == actual_bin[:,:,np.newaxis,:])
+    summe = (bin_comp == True).sum(3)
+    comp = summe > nmbr_min_lbsp
+    lbsp_decision[((comp == True).sum(2) >= R_lbsp_arr)] = 0
+    return lbsp_decision
+# LBSP DECISION =================================================================
 
-# BACKGROUND DECISION ====================================================================
-def decision(img,background_pictures, R_color_arr):
-    background = img*0
-    comp = np.absolute(img[:,:,np.newaxis] - background_pictures) < R_color_arr[:,:,np.newaxis]
-    background[(comp != False).sum(2) <= nmbr_min_back] = 255;
-    return background
-# BACKGROUND DECISION ====================================================================
+# COLOR DECISION ====================================================================
+def color(img,color_pictures, R_color_arr):
+    color_decision = img*0
+    comp = np.absolute(img[:,:,np.newaxis] - color_pictures) < R_color_arr[:,:,np.newaxis]
+    color_decision[(comp != False).sum(2) <= nmbr_min_back] = 255;
+    return color_decision
+# COLOR DECISION ====================================================================
 
 # BACKGROUND_UPDATE ======================================================================
-def background_update(img, background, background_pictures, T_arr):
+def background_update(img, background, color_pictures, T_arr, grid_pictures, lbsp_background_model):
+    global T_r 
+    
     n = np.uint8(np.floor(N_back*np.random.random()))
     # Random pixels with probability 1/T_arr
     rand_array = 100.*np.random.random(img.shape)
@@ -117,16 +112,31 @@ def background_update(img, background, background_pictures, T_arr):
         if new_y < 0 or new_y >= update_array.shape[1]:
             new_y = ind_y[i]-rand_y
         update_array[new_x, new_y] = True
-    # Update background pictures in plane n
-    background_pictures[update_array,n] = img[update_array]
+    # Update color pictures in plane n
+    color_pictures[update_array,n] = img[update_array]
     cv2.imshow('update_array', np.uint8(update_array)*255)
+    
+    # Update the lbsp background model
+    model_decision = grid_pictures - img[:,:,np.newaxis]
+    T = T_r * img
+    model = model_decision<T[:,:,np.newaxis]
+    lbsp_background_model[update_array,n,:] = model[update_array,:]
+
+    # T_r update ------ Grenzen noch anpassen, eventuell auch Geschwindigkeit der Aenderung
+    hammingweight=model.sum()*1.0/MAX_hamming_weight
+    #print(hammingweight)
+    if(T_r > 0.001 and T_r < 1):
+        if(hammingweight < 0.6):
+            T_r = T_r + 0.0001
+        if(hammingweight > 0.61):
+            T_r = T_r - 0.0001
 # BACKGROUND_UPDATE ======================================================================
 
 # DISTANCE_UPDATE ========================================================================
-def distance_update(img, background_pictures, rows, cols):
+def distance_update(img, color_pictures, rows, cols):
     global d_min_arr, d_min_new
     # Get the new minimum distance array
-    d_min_new = np.amin((np.absolute(img[:,:,np.newaxis] - background_pictures)), axis = 2)/255.0
+    d_min_new = np.amin((np.absolute(img[:,:,np.newaxis] - color_pictures)), axis = 2)/255.0
  
     d_min_arr = d_min_arr*(1-alpha) + d_min_new * alpha
     # bound it from 0 to 1
@@ -189,7 +199,7 @@ def probability_update(background, v_arr, d_min_arr):
 
 # PROGRAM ######################################################################################
 cap = cv2.VideoCapture('highway.avi')
-print(cap.get(cv2.cv.CV_CAP_PROP_FPS))
+#print(cap.get(cv2.cv.CV_CAP_PROP_FPS))
 ret, img = cap.read()
 img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 img = cv2.resize(img,None,fx=downsample, fy=downsample, interpolation = cv2.INTER_CUBIC)
@@ -198,8 +208,14 @@ rows, cols = img.shape
 
 MAX_hamming_weight = rows*cols*N_grid
 
-gradient_pictures = np.ones((rows,cols,N_grid))*255
-update_grid_pictures(img, gradient_pictures, rows, cols)
+grid_pictures = np.ones((rows,cols,N_grid))*255
+update_grid_pictures(img, grid_pictures, rows, cols)
+
+
+model_decision = grid_pictures - img[:,:,np.newaxis]
+T = T_r * img
+model = model_decision<T[:,:,np.newaxis]
+lbsp_background_model = np.ones((rows,cols,N_back,N_grid), dtype=bool)*model[:,:,np.newaxis,:]
 
 d_min_new = img*255
 d_min_arr = np.ones((rows, cols))
@@ -214,10 +230,10 @@ v_arr = img*0.0
 
 threshold_update(v_arr, d_min_arr)
 
-background_pictures = np.uint8(np.ones((rows, cols, N_back)) * img[:,:,np.newaxis])
-background = decision(img, background_pictures, R_color_arr)
-old_background = background
-blured = cv2.medianBlur(background, 9)
+color_pictures = np.uint8(np.ones((rows, cols, N_back)) * img[:,:,np.newaxis])
+color_decision = color(img, color_pictures, R_color_arr)
+old_background = color_decision
+blured = cv2.medianBlur(color_decision, 9)
 
 
 
@@ -231,25 +247,34 @@ while True:
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     img = cv2.resize(img,None,fx=downsample, fy=downsample, interpolation = cv2.INTER_CUBIC)
 
-    update_grid_pictures(img, gradient_pictures, rows, cols)
-    gradient = lbsp(img, gradient_pictures)
-    background_update(img, background, background_pictures, T_arr)
-    background = decision(img, background_pictures, R_color_arr)
-    blured = cv2.medianBlur(background, 5)
+    update_grid_pictures(img, grid_pictures, rows, cols)
+    lbsp_decision = lbsp(img, grid_pictures, color_pictures,lbsp_background_model)
+    background = lbsp_decision&color_decision;
+    background_update(img, background, color_pictures, T_arr,grid_pictures,lbsp_background_model)
+    color_decision = color(img, color_pictures, R_color_arr)
+    blured = cv2.medianBlur(color_decision, 5)
     
-    distance_update(img, background_pictures, rows, cols)
+    distance_update(img, color_pictures, rows, cols)
     recognize_blinking_pixels(background,blured)
     threshold_update(v_arr, d_min_arr)
     probability_update(background, v_arr, d_min_arr)
 
-    cv2.imshow('blured', blured)
+
+    cv2.imshow('original',img)
+
     cv2.imshow('distance',np.uint8(d_min_arr*255))
     cv2.imshow('distance new',np.uint8(d_min_new*255))
 
-    cv2.imshow('gradient',gradient)
-    cv2.imshow('original',img)
-    cv2.imshow('background',background)
+    cv2.imshow('lbsp_decision',lbsp_decision)
+    cv2.imshow('color_decision',color_decision)
+    cv2.imshow('blured color_decision', blured)
+
    
+    cv2.imshow('background',background)
+    blured2 = cv2.medianBlur(background, 3)
+    cv2.imshow('blured background',blured2)
+
+
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break
     # End time
