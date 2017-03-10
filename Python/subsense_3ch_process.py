@@ -360,7 +360,7 @@ if __name__ == '__main__':
     image_queue_b = Queue()
 
 
-    downsample = 0.4   
+    downsample = 0.7  
     
     # Create one instance per channel
     pbas_r = PBAS(channel_r, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
@@ -377,6 +377,7 @@ if __name__ == '__main__':
 
         # Read one frame of the video and break when error occurs (i.e. video ended)
         ret, img = cap.read()
+        #print(img.shape)
         if ret == False:
             break
 
