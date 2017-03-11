@@ -259,7 +259,7 @@ class SUBSENSE(Process):
                 self.img = image_queue_b.get()
                 
             self.init
-            self.img = cv2.resize(self.img,None,fx=self.downsample, fy=self.downsample, interpolation = cv2.INTER_CUBIC) 
+            self.img = cv2.resize(self.img,None,fx=self.downsample, fy=self.downsample, interpolation = cv2.INTER_AREA) 
             if self.init == 0:
                 self.init = 1
 
@@ -310,9 +310,9 @@ class SUBSENSE(Process):
             self.recognize_blinking_pixels()
             self.threshold_update()
             self.probability_update()
-            self.background = cv2.medianBlur(self.background, 3)
+            self.background = cv2.medianBlur(self.background, 1)
             
-            self.large_background = cv2.medianBlur(cv2.resize(self.background,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_CUBIC),5)
+            self.large_background = cv2.medianBlur(cv2.resize(self.background,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR),1)
             
             if( self.channel == 1):
                 background_queue_r.put(self.background)
@@ -360,7 +360,7 @@ if __name__ == '__main__':
     image_queue_b = Queue()
 
 
-    downsample = 0.7  
+    downsample = 0.2  
     
     # Create one instance per channel
     subsense_r = SUBSENSE(channel_r, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
@@ -368,7 +368,7 @@ if __name__ == '__main__':
     subsense_b = SUBSENSE(channel_b, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
     
     # Open VideoCapture; here i.e. 'highway.avi'
-    cap = cv2.VideoCapture('highway.avi')
+    cap = cv2.VideoCapture('snow.avi')
     once = 0
 
     while True:
