@@ -6,7 +6,7 @@ from multiprocessing import Process, Queue
 import time
 
 
-class PBAS(Process):
+class SUBSENSE(Process):
 
     channel = 0
     img = 0
@@ -363,9 +363,9 @@ if __name__ == '__main__':
     downsample = 0.7  
     
     # Create one instance per channel
-    pbas_r = PBAS(channel_r, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
-    pbas_g = PBAS(channel_g, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
-    pbas_b = PBAS(channel_b, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
+    subsense_r = SUBSENSE(channel_r, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
+    subsense_g = SUBSENSE(channel_g, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
+    subsense_b = SUBSENSE(channel_b, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
     
     # Open VideoCapture; here i.e. 'highway.avi'
     cap = cv2.VideoCapture('highway.avi')
@@ -387,9 +387,9 @@ if __name__ == '__main__':
 
         if once == 0:
             once = 1
-            pbas_r.start()
-            pbas_g.start()
-            pbas_b.start()
+            subsense_r.start()
+            subsense_g.start()
+            subsense_b.start()
         
         background = np.logical_or(np.logical_or(background_queue_r.get(), background_queue_g.get()), background_queue_b.get()) * 1.
         large_background = np.logical_or(np.logical_or(background_queue_r.get(), background_queue_g.get()), background_queue_b.get()) * 1.
@@ -408,14 +408,14 @@ if __name__ == '__main__':
             image_queue_g.close()
             image_queue_b.close()
 
-            pbas_r.terminate()
-            pbas_g.terminate()
-            pbas_b.terminate()
+            subsense_r.terminate()
+            subsense_g.terminate()
+            subsense_b.terminate()
             cap.release()
             cv2.destroyAllWindows()
-            pbas_r.join()
-            pbas_g.join()
-            pbas_b.join()
+            subsense_r.join()
+            subsense_g.join()
+            subsense_b.join()
             break
         # End time
         end = time.time()
