@@ -229,7 +229,7 @@ if __name__ == '__main__':
     T_inc = 1
     T_lower = 2
     T_upper = 150
-    alpha = 1
+    alpha = 10
 
     # Queues
     image_queue_r = Queue()
