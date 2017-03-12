@@ -116,8 +116,6 @@ class PBAS(Process):
         # Update background pixels in plane n
         self.background_pixel[update_array,n] = self.img[update_array]
         self.background_grad[update_array,n] = self.grad[update_array]
-        # Calculate average minimum distances
-        self.d_min_avg = self.d_min_arr.sum(2)/self.N
     # BACKGROUND_UPDATE ============================================================
 
 
@@ -125,6 +123,8 @@ class PBAS(Process):
     def distance_update(self, n):
         # Update minimum distance array
         self.d_min_arr[:,:,n] = self.d_min
+        # Calculate average minimum distances
+        self.d_min_avg = self.d_min_arr.sum(2)/self.N
     # DISTANCE_UPDATE ==============================================================
 
 
@@ -134,7 +134,6 @@ class PBAS(Process):
 
         self.R_arr[th_update] *= (1 - self.R_inc_dec)
         self.R_arr[~th_update] *= (1 + self.R_inc_dec)
-        self.R_arr[R_arr < self.R_lower] = R_lower
     # THRESHOLD_UPDATE =============================================================
 
 
@@ -221,7 +220,7 @@ if __name__ == '__main__':
     ch_b = 2
 
     # Set desired parameters
-    N = 10
+    N = 35
     nmbr_min = 2
     R_inc_dec = 0.05
     R_lower = 18
