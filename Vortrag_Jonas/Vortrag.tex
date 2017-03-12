@@ -1,0 +1,98 @@
+\documentclass[hyperref={pdfpagelabels=false}]{beamer}
+%\fontfamily{phv}\selectfont
+\usepackage{ucs}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+
+\usepackage{url}
+\usepackage{etoolbox}
+\appto\UrlBreaks{\do\a\do\b\do\c\do\d\do\e\do\f\do\g\do\h\do\i\do\j
+\do\k\do\l\do\m\do\n\do\o\do\p\do\q\do\r\do\s\do\t\do\u\do\v\do\w
+\do\x\do\y\do\z\do\-}
+
+\usepackage{tikz}
+\usepackage{lmodern}
+\title{Hintergrundsegmentierung}   
+\author{Christian Tanzer\\Jonas Bühlmeyer} 
+\date{15. März 2017} 
+
+
+
+\begin{document}
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\setcounter{framenumber}{0}
+\addtobeamertemplate{navigation symbols}{}{
+\usebeamerfont{footline}
+\usebeamercolor[blue]{footline}
+\hspace{1em}
+\insertframenumber/\inserttotalframenumber
+}
+
+\title{Self-Balanced SENsitivity SEgmenter}   
+\author{Jonas Bühlmeyer} 
+
+\begin{frame}
+	\maketitle
+\end{frame}
+
+\begin{frame}[t]{Konzept des Algorithmus
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{Abbildungen/Konzept.pdf}
+		\label{fig:Abbildungen/Grid}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\linewidth]{Abbildungen/Grid.pdf}
+		\label{fig:Abbildungen/Grid}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Vergleich der Farbwerte}
+	\bigskip
+	\bigskip
+	\bigskip
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.6\linewidth]{Abbildungen/Farb_Vergleich.pdf}
+		\label{fig:Abbildungen/Grid}
+	\end{figure}
+	\centering
+	\bigskip
+	$\Rightarrow$ die Farbwerte werden durch Subtraktion verglichen
+\end{frame}
+
+\begin{frame}[t]{Vergleich der Farbwerte}
+	\centering
+	\bigskip
+	15 $<$ T$_r$ $\cdot$ 255 $\rightarrow$ Hintergrund
+
+	\bigskip
+	30 $>$ T$_r$ $\cdot$ 50 $\rightarrow$ Vordergrund
+	
+	\bigskip
+	80 $>$ T$_r$ $\cdot$ 20 $\rightarrow$ Vordergrund
+
+\end{frame}
+
+
+\begin{frame}[t]{Quellen}
+	\begin{itemize}
+		\item \url{http://www.stern.de/kultur/photoshop-oder-bodypainting--der-kuenstler-liu-bolin-macht-menschen-unsichtbar-6618586.html}, aufgerufen am 1. Dezember 2016
+		\item \url{http://www.sueddeutsche.de/auto/autonomes-fahren-was-autonome-autos-koennen-und-was-nicht-1.3062258}, aufgerufen am 1. Dezember 2016
+		\item Rafael C. Gonzalez, Richard E. Woods: "Digital Image Processing", Addison-Wesley Publishing Company, 1992
+		\item Pierre-Luc St-Charles,Guillaume-Alexandre Bilodeau and Robert Bergevin: "SuBSENSE: A Universal Change Detection Method With Local Adaptive Sensitivity" in IEEE Transactions on Image Processing, vol. 24, no. 1, pp. 359-373, Januar 2015
+	\end{itemize}
+\end{frame}
+
+\end{document}
