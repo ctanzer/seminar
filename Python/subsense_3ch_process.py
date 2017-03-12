@@ -310,9 +310,9 @@ class SUBSENSE(Process):
             self.recognize_blinking_pixels()
             self.threshold_update()
             self.probability_update()
-            self.background = cv2.medianBlur(self.background, 1)
+            self.background = cv2.medianBlur(self.background, 3)
             
-            self.large_background = cv2.medianBlur(cv2.resize(self.background,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR),1)
+            self.large_background = cv2.medianBlur(cv2.resize(self.background,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR),3)
             
             if( self.channel == 1):
                 background_queue_r.put(self.background)
@@ -360,7 +360,7 @@ if __name__ == '__main__':
     image_queue_b = Queue()
 
 
-    downsample = 0.2  
+    downsample = 1  
     
     # Create one instance per channel
     subsense_r = SUBSENSE(channel_r, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
@@ -368,9 +368,14 @@ if __name__ == '__main__':
     subsense_b = SUBSENSE(channel_b, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
     
     # Open VideoCapture; here i.e. 'highway.avi'
-    cap = cv2.VideoCapture('snow.avi')
+    cap = cv2.VideoCapture('highway.avi')
     once = 0
 
+    ret, img = cap.read()
+    rows, cols = img[:,:,0].shape
+    fourcc = cv2.cv.FOURCC('P','I','M','1')
+    video = cv2.VideoWriter("test.avi",fourcc, 24.0, (rows,cols),True)
+            
     while True:
         # Start time
         start = time.time()
@@ -384,6 +389,8 @@ if __name__ == '__main__':
         image_queue_r.put(img[:,:,0])
         image_queue_g.put(img[:,:,1])
         image_queue_b.put(img[:,:,2])
+    
+        
 
         if once == 0:
             once = 1
@@ -397,7 +404,8 @@ if __name__ == '__main__':
         cv2.imshow('orig', img)
         cv2.imshow('background',background)
         cv2.imshow('large_background', large_background)
-
+        
+        video.write(background)
         # Quit program pressing key 'q'
         if cv2.waitKey(10) & 0xFF == ord('q'):
             background_queue_r.close()
@@ -416,6 +424,8 @@ if __name__ == '__main__':
             subsense_r.join()
             subsense_g.join()
             subsense_b.join()
+            
+            video.realease()
             break
         # End time
         end = time.time()
