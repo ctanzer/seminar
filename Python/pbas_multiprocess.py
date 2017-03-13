@@ -78,8 +78,9 @@ class PBAS(Process):
         """ Calculates the gradient magnitude an image
 
         """
-        grad_x, grad_y = np.gradient(self.img)
-        self.grad = cv2.magnitude(grad_x, grad_y)
+        sobelx = cv2.Sobel(self.img,cv2.CV_64F,1,0,ksize=5)
+        sobely = cv2.Sobel(self.img,cv2.CV_64F,0,1,ksize=5)
+        self.grad = cv2.magnitude(sobelx, sobely)
         self.avg_grad = np.average(self.grad)
     # GRADIENT =====================================================================
 
