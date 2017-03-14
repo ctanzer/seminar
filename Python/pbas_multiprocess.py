@@ -314,16 +314,6 @@ if __name__ == '__main__':
         cv2.imshow('orig', img)
         cv2.imshow('foreground', foreground)
 
-        print 'number: ', n_im
-        # cv2.imwrite('./pbas_bilder/foreground{:04d}.jpg'.format(n_im), foreground*255)
-        # temp = temp_queue.get()
-        # cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
-        # cv2.imwrite('./pbas_bilder/grad{:04d}.jpg'.format(n_im), temp)
-        # temp = temp_queue.get()
-        # cv2.imwrite('./pbas_bilder/back_grad{:04d}.jpg'.format(n_im), temp)
-        # cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
-        n_im += 1
-
         pbas_pub.publish(bridge.cv2_to_imgmsg(foreground))
 
         # Quit program pressing key 'q'

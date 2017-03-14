@@ -1,10 +1,16 @@
 import cv2
 import numpy as np
-from numpy import pi
-import multiprocessing
 from multiprocessing import Process, Queue
 import time
 
+import rospy
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+
+# Get image from topic
+def callback_get_image(data):
+    global img, bridge
+    img = bridge.imgmsg_to_cv2(data)*1
 
 class SUBSENSE(Process):
 
@@ -253,10 +259,16 @@ class SUBSENSE(Process):
         while True:
             if( self.channel == 1):
                 self.img = image_queue_r.get()
+                if self.img == 'exit':
+                    break
             elif (self.channel == 2):
                 self.img = image_queue_g.get()
+                if self.img == 'exit':
+                    break
             else:
                 self.img = image_queue_b.get()
+                if self.img == 'exit':
+                    break
 
             self.init
             self.img = cv2.resize(self.img,None,fx=self.downsample, fy=self.downsample, interpolation = cv2.INTER_AREA)
@@ -359,36 +371,33 @@ if __name__ == '__main__':
     image_queue_g = Queue()
     image_queue_b = Queue()
 
-
-    downsample = 0.01
+    downsample = 0.5
 
     # Create one instance per channel
     subsense_r = SUBSENSE(channel_r, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
     subsense_g = SUBSENSE(channel_g, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
     subsense_b = SUBSENSE(channel_b, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
 
-    # Open VideoCapture; here i.e. 'highway.avi'
-    cap = cv2.VideoCapture('highway.avi')
     once = 0
 
-    ret, img = cap.read()
-    rows, cols = img[:,:,0].shape
+    # ROS Interface
+    # Init Node
+    img = 0
+    rospy.init_node('SUBSENSE')
+    bridge = CvBridge()
+    subsense_sub = rospy.Subscriber("zed_front_right/rgb/image_raw_color", Image, callback=callback_get_image, queue_size=10)
+    subsense_pub = rospy.Publisher("subsense_segmentation", Image, queue_size=10)
 
     while True:
         # Start time
         start = time.time()
 
-        # Read one frame of the video and break when error occurs (i.e. video ended)
-        ret, img = cap.read()
-        #print(img.shape)
-        if ret == False:
-            break
+        while type(img) == int:
+            rospy.Rate.sleep(rospy.Rate(1))
 
         image_queue_r.put(img[:,:,0])
         image_queue_g.put(img[:,:,1])
         image_queue_b.put(img[:,:,2])
-
-
 
         if once == 0:
             once = 1
@@ -403,11 +412,17 @@ if __name__ == '__main__':
         cv2.imshow('background',background)
         cv2.imshow('large_background', large_background)
 
+        subsense_pub.publish(bridge.cv2_to_imgmsg(large_background))
+
         # Quit program pressing key 'q'
         if cv2.waitKey(10) & 0xFF == ord('q'):
+            image_queue_r.put('exit')
+            image_queue_g.put('exit')
+            image_queue_b.put('exit')
 
-
+            time.sleep(1)
             break
+
         # End time
         end = time.time()
         # Time elapsed
@@ -416,6 +431,8 @@ if __name__ == '__main__':
         fps  = 1 / seconds;
         print "Estimated frames per second : {0}".format(fps);
 
+    subsense_sub.unregister()
+    subsense_pub.unregister()
 
     background_queue_r.close()
     background_queue_g.close()
@@ -428,8 +445,12 @@ if __name__ == '__main__':
     subsense_r.terminate()
     subsense_g.terminate()
     subsense_b.terminate()
-    cap.release()
+
+    if not subsense_r.is_alive():
+        print 'pbas_r terminated'
+    if not subsense_g.is_alive():
+        print 'pbas_g terminated'
+    if not subsense_b.is_alive():
+        print 'pbas_b terminated'
+
     cv2.destroyAllWindows()
-    subsense_r.join()
-    subsense_g.join()
-    subsense_b.join()
