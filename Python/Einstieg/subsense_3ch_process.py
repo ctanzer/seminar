@@ -360,7 +360,7 @@ if __name__ == '__main__':
     image_queue_b = Queue()
 
 
-    downsample = 0.01  
+    downsample = 1  
     
     # Create one instance per channel
     subsense_r = SUBSENSE(channel_r, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
@@ -368,7 +368,7 @@ if __name__ == '__main__':
     subsense_b = SUBSENSE(channel_b, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)
     
     # Open VideoCapture; here i.e. 'highway.avi'
-    cap = cv2.VideoCapture('highway.avi')
+    cap = cv2.VideoCapture('2.mp4')
     once = 0
 
     ret, img = cap.read()
@@ -403,9 +403,25 @@ if __name__ == '__main__':
         cv2.imshow('background',background)
         cv2.imshow('large_background', large_background)
         
+        video.write(background)
         # Quit program pressing key 'q'
         if cv2.waitKey(10) & 0xFF == ord('q'):
+            background_queue_r.close()
+            background_queue_g.close()
+            background_queue_b.close()
 
+            image_queue_r.close()
+            image_queue_g.close()
+            image_queue_b.close()
+
+            subsense_r.terminate()
+            subsense_g.terminate()
+            subsense_b.terminate()
+            cap.release()
+            cv2.destroyAllWindows()
+            subsense_r.join()
+            subsense_g.join()
+            subsense_b.join()
             
             break
         # End time
@@ -415,22 +431,6 @@ if __name__ == '__main__':
         # Calculate frames per second
         fps  = 1 / seconds;
         print "Estimated frames per second : {0}".format(fps);
-
-
-    background_queue_r.close()
-    background_queue_g.close()
-    background_queue_b.close()
-
-    image_queue_r.close()
-    image_queue_g.close()
-    image_queue_b.close()
-
-    subsense_r.terminate()
-    subsense_g.terminate()
-    subsense_b.terminate()
     cap.release()
     cv2.destroyAllWindows()
-    subsense_r.join()
-    subsense_g.join()
-    subsense_b.join()
 
