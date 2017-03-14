@@ -83,21 +83,10 @@ class PBAS(Process):
         """ Calculates the gradient magnitude an image
 
         """
-<<<<<<< Updated upstream
         sobelx = cv2.Sobel(self.img,cv2.CV_64F,dx=1,dy=0,ksize=1)
         sobely = cv2.Sobel(self.img,cv2.CV_64F,dx=0,dy=1,ksize=1)
-        # sobelx = cv2.Sobel(self.img,ddepth=-1,dx=1,dy=0,ksize=5)
-        # sobely = cv2.Sobel(self.img,ddepth=-1,dx=0,dy=1,ksize=5)
         self.grad = np.sqrt(sobelx**2+sobely**2)
-        # self.avg_grad = np.average(self.grad)
-        self.avg_grad = np.sum(self.grad)/(self.grad.shape[0] * self.grad.shape[1])
-=======
-        sobelx = cv2.Sobel(self.img,cv2.CV_64F,1,0,ksize=5)
-        sobely = cv2.Sobel(self.img,cv2.CV_64F,0,1,ksize=5)
-        self.grad = cv2.magnitude(sobelx, sobely).istype(np.float)
-        # self.avg_grad = np.average(self.grad)
         self.avg_grad = np.sum(self.grad)/(self.grad.shape[0]*self.grad.shape[1])
->>>>>>> Stashed changes
     # GRADIENT =====================================================================
 
 
@@ -304,12 +293,12 @@ if __name__ == '__main__':
         cv2.imshow('foreground', foreground)
 
         print 'number: ', n_im
-        cv2.imwrite('./pbas_bilder/foreground{:04d}.jpg'.format(n_im), foreground*255)
+        # cv2.imwrite('./pbas_bilder/foreground{:04d}.jpg'.format(n_im), foreground*255)
         temp = temp_queue.get()
         cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
-        cv2.imwrite('./pbas_bilder/grad{:04d}.jpg'.format(n_im), temp)
+        # cv2.imwrite('./pbas_bilder/grad{:04d}.jpg'.format(n_im), temp)
         temp = temp_queue.get()
-        cv2.imwrite('./pbas_bilder/back_grad{:04d}.jpg'.format(n_im), temp)
+        # cv2.imwrite('./pbas_bilder/back_grad{:04d}.jpg'.format(n_im), temp)
         cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
         n_im += 1
 
