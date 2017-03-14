@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.9)  12 MAR 2017 15:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.9)  14 MAR 2017 17:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -699,6 +699,29 @@ LaTeX Info: Redefining \textlatin on input line 1448.
 )
 Package babel Info: Making " an active character on input line 125.
 )))
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen189
+\captionmargin@=\dimen190
+\captionwidth=\dimen191
+\caption@tempdima=\dimen192
+\caption@indent=\dimen193
+\caption@parindent=\dimen194
+\caption@hangindent=\dimen195
+)
+\c@ContinuedFloat=\count155
+Package caption Info: beamer document class.
+Package caption Info: hyperref package is loaded.
+Package caption Info: Hyperref support is turned off
+(caption)             because hyperref has stopped early.
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/pgfplots/pgfplots.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2016/08/10 v1.14 Data Visualization (1.14)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
 (/usr/local/texlive/2016/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
 Package: pgf 2015/08/07 v3.0.1a (rcs-revision 1.15)
@@ -715,8 +738,8 @@ File: pgfmoduleplot.code.tex 2015/08/03  (rcs-revision 1.13)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version
 -0-65.sty
 Package: pgfcomp-version-0-65 2007/07/03 v3.0.1a (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen189
-\pgf@nodesepend=\dimen190
+\pgf@nodesepstart=\dimen196
+\pgf@nodesepend=\dimen197
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version
 -1-18.sty
@@ -731,8 +754,8 @@ Package: pgfcomp-version-1-18 2007/07/23 v3.0.1a (rcs-revision 1.1)
 Package: pgffor 2013/12/13 v3.0.1a (rcs-revision 1.25)
 
 (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
-\pgffor@iter=\dimen191
-\pgffor@skip=\dimen192
+\pgffor@iter=\dimen198
+\pgffor@skip=\dimen199
 \pgffor@stack=\toks48
 \pgffor@toks=\toks49
 ))
@@ -743,38 +766,156 @@ Package: tikz 2015/08/07 v3.0.1a (rcs-revision 1.151)
 (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothan
 dlers.code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.1a (rcs-revision 1.20)
-\pgf@plot@mark@count=\count155
-\pgfplotmarksize=\dimen193
+\pgf@plot@mark@count=\count156
+\pgfplotmarksize=\dimen256
 )
-\tikz@lastx=\dimen194
-\tikz@lasty=\dimen195
-\tikz@lastxsaved=\dimen196
-\tikz@lastysaved=\dimen197
-\tikzleveldistance=\dimen198
-\tikzsiblingdistance=\dimen199
+\tikz@lastx=\dimen257
+\tikz@lasty=\dimen258
+\tikz@lastxsaved=\dimen259
+\tikz@lastysaved=\dimen260
+\tikzleveldistance=\dimen261
+\tikzsiblingdistance=\dimen262
 \tikz@figbox=\box54
 \tikz@figbox@bg=\box55
 \tikz@tempbox=\box56
 \tikz@tempbox@bg=\box57
-\tikztreelevel=\count156
-\tikznumberofchildren=\count157
-\tikznumberofcurrentchild=\count158
-\tikz@fig@count=\count159
+\tikztreelevel=\count157
+\tikznumberofchildren=\count158
+\tikznumberofcurrentchild=\count159
+\tikz@fig@count=\count160
 
 (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.cod
 e.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count160
-\pgfmatrixcurrentcolumn=\count161
-\pgf@matrix@numberofcolumns=\count162
+\pgfmatrixcurrentrow=\count161
+\pgfmatrixcurrentcolumn=\count162
+\pgf@matrix@numberofcolumns=\count163
 )
-\tikz@expandcount=\count163
+\tikz@expandcount=\count164
 
 (/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
 s/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.1a (rcs-revision 1.2)
 )))
-(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/lmodern.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks50
+\t@pgfplots@tokb=\toks51
+\t@pgfplots@tokc=\toks52
+\pgfplots@tmpa=\dimen263
+\c@pgfplots@coordindex=\count165
+\c@pgfplots@scanlineindex=\count166
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric
+.code.tex))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.c
+ode.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_loader.code.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.cod
+e.tex)
+Package pgfplots: loading complementary arithmetics for your pgf version...
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgflibraryfpu.code.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplot
+soldpgfsupp_pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count167
+))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code
+.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+liststructure.code.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+liststructureext.code.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+array.code.tex
+\c@pgfplotsarray@tmp=\count168
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+matrix.code.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstable
+shared.code.tex
+\c@pgfplotstable@counta=\count169
+\t@pgfplotstable@a=\toks53
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/liststructure/pgfplots
+deque.code.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.co
+de.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.da
+ta.code.tex))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb
+.code.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplot
+s.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count170
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots
+.surfshading.pgfsys-pdftex.def)))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.
+code.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.cod
+e.tex))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.c
+ode.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.c
+ode.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandle
+r.code.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.
+code.tex)))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.
+tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessin
+g.code.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.cod
+e.tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.
+tex)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.te
+x)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarydecorations.code.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/modules/pgfmoduledecoration
+s.code.tex
+\pgfdecoratedcompleteddistance=\dimen264
+\pgfdecoratedremainingdistance=\dimen265
+\pgfdecoratedinputsegmentcompleteddistance=\dimen266
+\pgfdecoratedinputsegmentremainingdistance=\dimen267
+\pgf@decorate@distancetomove=\dimen268
+\pgf@decorate@repeatstate=\count171
+\pgfdecorationsegmentamplitude=\dimen269
+\pgfdecorationsegmentlength=\dimen270
+)
+\tikz@lib@dec@box=\box58
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarydecorations.pathmorphing.code.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/libraries/decorations/pgfli
+brarydecorations.pathmorphing.code.tex))
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarydecorations.pathreplacing.code.tex
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/libraries/decorations/pgfli
+brarydecorations.pathreplacing.code.tex))
+\pgfplots@numplots=\count172
+\pgfplots@xmin@reg=\dimen271
+\pgfplots@xmax@reg=\dimen272
+\pgfplots@ymin@reg=\dimen273
+\pgfplots@ymax@reg=\dimen274
+\pgfplots@zmin@reg=\dimen275
+\pgfplots@zmax@reg=\dimen276
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmar
+ks.code.tex
+File: pgflibraryplotmarks.code.tex 2015/08/03 v3.0.1a (rcs-revision 1.14)
+))) (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/lmodern.sty
 Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -814,9 +955,24 @@ File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 17.
+(hyperref)                removing `\\' on input line 21.
 
 (./Vortrag.aux
+
+LaTeX Warning: Label `fig:Abbildungen/Grid' multiply defined.
+
+
+LaTeX Warning: Label `fig:Abbildungen/Grid' multiply defined.
+
+
+LaTeX Warning: Label `fig:Abbildungen/Grid' multiply defined.
+
+
+LaTeX Warning: Label `fig:Abbildungen/Grid' multiply defined.
+
+
+LaTeX Warning: Label `fig:Abbildungen/Grid' multiply defined.
+
 
 LaTeX Warning: Label `fig:Abbildungen/Grid' multiply defined.
 
@@ -826,21 +982,21 @@ LaTeX Warning: Label `fig:Abbildungen/Grid' multiply defined.
 )
 \openout1 = `Vortrag.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 22.
-LaTeX Font Info:    ... okay on input line 22.
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 22.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 26.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -880,17 +1036,17 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count164
-\scratchdimen=\dimen256
-\scratchbox=\box58
-\nofMPsegments=\count165
-\nofMParguments=\count166
-\everyMPshowfont=\toks50
-\MPscratchCnt=\count167
-\MPscratchDim=\dimen257
-\MPnumerator=\count168
-\makeMPintoPDFobject=\count169
-\everyMPtoPDFconversion=\toks51
+\scratchcounter=\count173
+\scratchdimen=\dimen277
+\scratchbox=\box59
+\nofMPsegments=\count174
+\nofMParguments=\count175
+\everyMPshowfont=\toks54
+\MPscratchCnt=\count176
+\MPscratchDim=\dimen278
+\MPnumerator=\count177
+\makeMPintoPDFobject=\count178
+\everyMPtoPDFconversion=\toks55
 ) (/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -909,8 +1065,8 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 ABD: EveryShipout initializing macros
-\AtBeginShipoutBox=\box59
-Package hyperref Info: Link coloring OFF on input line 22.
+\AtBeginShipoutBox=\box60
+Package hyperref Info: Link coloring OFF on input line 26.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -918,62 +1074,62 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count170
+\c@section@level=\count179
 )
-LaTeX Info: Redefining \ref on input line 22.
-LaTeX Info: Redefining \pageref on input line 22.
-LaTeX Info: Redefining \nameref on input line 22.
+LaTeX Info: Redefining \ref on input line 26.
+LaTeX Info: Redefining \pageref on input line 26.
+LaTeX Info: Redefining \nameref on input line 26.
 
 (./Vortrag.out) (./Vortrag.out)
 \@outlinefile=\write5
 \openout5 = `Vortrag.out'.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 22.
+(Font)                  OT1/lmr/m/n --> OT1/cmss/m/n on input line 26.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/lmr/bx/n --> OT1/cmss/bx/n on input line 22.
+(Font)                  OT1/lmr/bx/n --> OT1/cmss/bx/n on input line 26.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
-(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 22.
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 26.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
-(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 22.
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 26.
 \symnumbers=\mathgroup6
 \sympureletters=\mathgroup7
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 22.
-LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 22.
+(Font)                  OT1/lmss/m/n --> T1/lmr/m/n on input line 26.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 22.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 22.
-LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 22.
+(Font)                  OT1/lmr/bx/n --> T1/lmss/bx/n on input line 26.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 22.
+(Font)                  OT1/lmss/m/n --> T1/lmss/m/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 22.
-LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 22.
+(Font)                  OT1/lmss/bx/n --> T1/lmss/m/n on input line 26.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 22.
+(Font)                  OT1/lmr/m/it --> T1/lmss/m/it on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 22.
-LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 22.
+(Font)                  OT1/lmr/bx/it --> T1/lmss/m/it on input line 26.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 22.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 22.
+(Font)                  OT1/lmtt/m/n --> T1/lmtt/m/n on input line 26.
 LaTeX Font Info:    Overwriting symbol font `numbers' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 22.
+(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 26.
 LaTeX Font Info:    Overwriting symbol font `pureletters' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 22.
+(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `bold'
-(Font)                  OT1/lmss/bx/n --> T1/lmr/bx/n on input line 22.
+(Font)                  OT1/lmss/bx/n --> T1/lmr/bx/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
-(Font)                  T1/lmss/bx/n --> T1/lmss/bx/n on input line 22.
+(Font)                  T1/lmss/bx/n --> T1/lmss/bx/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 22.
+(Font)                  T1/lmss/m/n --> T1/lmss/bx/n on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
-(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 22.
+(Font)                  T1/lmss/m/it --> T1/lmss/bx/it on input line 26.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  T1/lmtt/m/n --> T1/lmtt/bx/n on input line 22.
+(Font)                  T1/lmtt/m/n --> T1/lmtt/bx/n on input line 26.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/beamer/translator/dicts/translato
 r-basic-dictionary/translator-basic-dictionary-English.dict
@@ -999,14 +1155,490 @@ Dictionary: translator-numbers-dictionary, Language: English
 r-theorem-dictionary/translator-theorem-dictionary-English.dict
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \includegraphics on input line 22.
+LaTeX Info: Redefining \includegraphics on input line 26.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
-) (./Vortrag.nav)
-[1
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
+ick labels; missing features). Consider writing \pgfplotsset{compat=1.14} into 
+your preamble.
+ on input line 26.
+
+(./Vortrag.nav) [1
+
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Vort
+rag.toc) [2
+
+]
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect o
+(hyperref)                setting the option has no effect on input line 46.
+
+[3
+
+] <Abbildungen/multiprocess.pdf, id=112, 403.5075pt x 314.17375pt>
+File: Abbildungen/multiprocess.pdf Graphic file (type pdf)
+
+<use Abbildungen/multiprocess.pdf>
+Package pdftex.def Info: Abbildungen/multiprocess.pdf used on input line 63.
+(pdftex.def)             Requested size: 245.83282pt x 191.406pt.
+ [4
+
+ <./Abbildungen/multiprocess.pdf>]
+<Abbildungen/gesamt.pdf, id=143, 648.4225pt x 186.6975pt>
+File: Abbildungen/gesamt.pdf Graphic file (type pdf)
+
+<use Abbildungen/gesamt.pdf>
+Package pdftex.def Info: Abbildungen/gesamt.pdf used on input line 74.
+(pdftex.def)             Requested size: 307.28987pt x 88.47711pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
+en/Grid}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.74 \end{frame}
+                 [5
+
+ <./Abbildungen/gesamt.pdf>]
+<Abbildungen/Konzept.pdf, id=172, 293.095pt x 269.005pt>
+File: Abbildungen/Konzept.pdf Graphic file (type pdf)
+
+<use Abbildungen/Konzept.pdf>
+Package pdftex.def Info: Abbildungen/Konzept.pdf used on input line 83.
+(pdftex.def)             Requested size: 184.3758pt x 169.21954pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
+en/Grid}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.83 \end{frame}
+                 [6
+
+ <./Abbildungen/Konzept.pdf>]
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 101
+.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/ot1lmss.fd
+File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 101.
+
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 101
+.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 101
+.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 101.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 101.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 101.
+LaTeX Font Info:    Try loading font information for U+msa on input line 101.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 101.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 101.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <8> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 101.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 101.
+ [7
+
+]
+<Abbildungen/Farb_Vergleich.pdf, id=233, 217.81375pt x 92.345pt>
+File: Abbildungen/Farb_Vergleich.pdf Graphic file (type pdf)
+
+<use Abbildungen/Farb_Vergleich.pdf>
+Package pdftex.def Info: Abbildungen/Farb_Vergleich.pdf used on input line 116.
+
+(pdftex.def)             Requested size: 184.3758pt x 78.1681pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
+en/Grid}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.116 \end{frame}
+                  [8
+
+ <./Abbildungen/Farb_Vergleich.pdf>] [9
+
+]
+<Abbildungen/Eingang3.jpg, id=288, 321.2pt x 240.9pt>
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 156.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/color_decision.jpg, id=289, 224.84pt x 168.63pt>
+File: Abbildungen/color_decision.jpg Graphic file (type jpg)
+
+<use Abbildungen/color_decision.jpg>
+Package pdftex.def Info: Abbildungen/color_decision.jpg used on input line 156.
+
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [10
+
+ <./Abbildungen/Eingang3.jpg> <./Abbildungen/color_decision.jpg>]
+File: Abbildungen/Konzept.pdf Graphic file (type pdf)
+ <use Abbildungen/Konzept.pdf>
+Package pdftex.def Info: Abbildungen/Konzept.pdf used on input line 165.
+(pdftex.def)             Requested size: 184.3758pt x 169.21954pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
+en/Grid}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.165 \end{frame}
+                  [11
+
+]
+<Abbildungen/Grid.pdf, id=340, 162.6075pt x 163.61125pt>
+File: Abbildungen/Grid.pdf Graphic file (type pdf)
+
+<use Abbildungen/Grid.pdf>
+Package pdftex.def Info: Abbildungen/Grid.pdf used on input line 176.
+(pdftex.def)             Requested size: 138.2795pt x 139.14261pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
+en/Grid}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.176 \end{frame}
+                  [12
+
+ <./Abbildungen/Grid.pdf>]
+File: Abbildungen/Farb_Vergleich.pdf Graphic file (type pdf)
+
+<use Abbildungen/Farb_Vergleich.pdf>
+Package pdftex.def Info: Abbildungen/Farb_Vergleich.pdf used on input line 191.
+
+(pdftex.def)             Requested size: 184.3758pt x 78.1681pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
+en/Grid}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.191 \end{frame}
+                  [13
+
+] [14
+
+] [15
+
+]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+ <use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 246.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/lbsp_decision.jpg, id=447, 224.84pt x 168.63pt>
+File: Abbildungen/lbsp_decision.jpg Graphic file (type jpg)
+
+<use Abbildungen/lbsp_decision.jpg>
+Package pdftex.def Info: Abbildungen/lbsp_decision.jpg used on input line 246.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [16
+
+ <./Abbildungen/lbsp_decision.jpg>]
+<Abbildungen/modell.pdf, id=474, 511.9125pt x 233.87375pt>
+File: Abbildungen/modell.pdf Graphic file (type pdf)
+
+<use Abbildungen/modell.pdf>
+Package pdftex.def Info: Abbildungen/modell.pdf used on input line 258.
+(pdftex.def)             Requested size: 291.92444pt x 133.37007pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
+en/Grid}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.258 \end{frame}
+                  [17
+
+ <./Abbildungen/modell.pdf>]
+<Abbildungen/Eingang1.jpg, id=503, 321.2pt x 240.9pt>
+File: Abbildungen/Eingang1.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang1.jpg>
+Package pdftex.def Info: Abbildungen/Eingang1.jpg used on input line 287.
+(pdftex.def)             Requested size: 86.04298pt x 64.53291pt.
+
+<Abbildungen/Eingang2.jpg, id=504, 321.2pt x 240.9pt>
+File: Abbildungen/Eingang2.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang2.jpg>
+Package pdftex.def Info: Abbildungen/Eingang2.jpg used on input line 287.
+(pdftex.def)             Requested size: 86.04298pt x 64.53291pt.
+
+<Abbildungen/Pfeil.pdf, id=505, 45.04408pt x 53.52959pt>
+File: Abbildungen/Pfeil.pdf Graphic file (type pdf)
+
+<use Abbildungen/Pfeil.pdf>
+Package pdftex.def Info: Abbildungen/Pfeil.pdf used on input line 287.
+(pdftex.def)             Requested size: 19.66705pt x 23.37175pt.
+
+<Abbildungen/Hintergrund.jpg, id=506, 321.2pt x 240.9pt>
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+
+<use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+ <use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+
+<use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+ <use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+
+<use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+
+Overfull \hbox (22.72038pt too wide) in paragraph at lines 287--287
+ [][] 
+ []
+
+[18
+
+ <./Abbildungen/Eingang1.jpg> <./Abbildungen/Eingang2.jpg> <./Abbildungen/Pfeil
+.pdf> <./Abbildungen/Hintergrund.jpg>]
+File: Abbildungen/gesamt.pdf Graphic file (type pdf)
+ <use Abbildungen/gesamt.pdf>
+Package pdftex.def Info: Abbildungen/gesamt.pdf used on input line 300.
+(pdftex.def)             Requested size: 307.28987pt x 88.47711pt.
+pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
+en/Grid}) has been already used, duplicate ignored
+<to be read again> 
+                   \relax 
+l.300 \end{frame}
+                  [19
+
+]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+ <use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 320.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/distance.jpg, id=567, 224.84pt x 168.63pt>
+File: Abbildungen/distance.jpg Graphic file (type jpg)
+
+<use Abbildungen/distance.jpg>
+Package pdftex.def Info: Abbildungen/distance.jpg used on input line 320.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [20
+
+ <./Abbildungen/distance.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 344.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/blinking_pixels1.jpg, id=594, 224.84pt x 168.63pt>
+File: Abbildungen/blinking_pixels1.jpg Graphic file (type jpg)
+
+<use Abbildungen/blinking_pixels1.jpg>
+Package pdftex.def Info: Abbildungen/blinking_pixels1.jpg used on input line 34
+4.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [21
+
+ <./Abbildungen/blinking_pixels1.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+ <use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 368.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/R.jpg, id=620, 224.84pt x 168.63pt>
+File: Abbildungen/R.jpg Graphic file (type jpg)
+ <use Abbildungen/R.jpg>
+Package pdftex.def Info: Abbildungen/R.jpg used on input line 368.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+
+[22
+
+ <./Abbildungen/R.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+ <use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 386.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/R_color.jpg, id=647, 224.84pt x 168.63pt>
+File: Abbildungen/R_color.jpg Graphic file (type jpg)
+
+<use Abbildungen/R_color.jpg>
+Package pdftex.def Info: Abbildungen/R_color.jpg used on input line 386.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [23
+
+ <./Abbildungen/R_color.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 405.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/R_lbsp.jpg, id=673, 224.84pt x 168.63pt>
+File: Abbildungen/R_lbsp.jpg Graphic file (type jpg)
+
+<use Abbildungen/R_lbsp.jpg>
+Package pdftex.def Info: Abbildungen/R_lbsp.jpg used on input line 405.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [24
+
+ <./Abbildungen/R_lbsp.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 429.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/threshold.jpg, id=700, 224.84pt x 168.63pt>
+File: Abbildungen/threshold.jpg Graphic file (type jpg)
+
+<use Abbildungen/threshold.jpg>
+Package pdftex.def Info: Abbildungen/threshold.jpg used on input line 429.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [25
+
+ <./Abbildungen/threshold.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 444.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/update_array.jpg, id=727, 224.84pt x 168.63pt>
+File: Abbildungen/update_array.jpg Graphic file (type jpg)
+
+<use Abbildungen/update_array.jpg>
+Package pdftex.def Info: Abbildungen/update_array.jpg used on input line 444.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [26
+
+ <./Abbildungen/update_array.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 459.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/Segmentierung.jpg, id=752, 321.2pt x 240.9pt>
+File: Abbildungen/Segmentierung.jpg Graphic file (type jpg)
+
+<use Abbildungen/Segmentierung.jpg>
+Package pdftex.def Info: Abbildungen/Segmentierung.jpg used on input line 459.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+ [27
+
+ <./Abbildungen/Segmentierung.jpg>]
+
+Package hyperref Warning: Option `pdfauthor' has already been used,
+(hyperref)                setting the option has no effect on input line 463.
+
+[28
+
+]
+
+Package hyperref Warning: Option `pdfauthor' has already been used,
+(hyperref)                setting the option has no effect on input line 478.
+
+[29
+
+] [30
+
+] [31
+
+] [32
+
+] [33
+
+]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 593.
+LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 593.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 593.
+
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [34
+
+]
+\tf@nav=\write6
+\openout6 = `Vortrag.nav'.
+
+\tf@toc=\write7
+\openout7 = `Vortrag.toc'.
+
+\tf@snm=\write8
+\openout8 = `Vortrag.snm'.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 595.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 595.
+ (./Vortrag.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 595.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 595.
+Package rerunfilecheck Info: File `Vortrag.out' has not changed.
+(rerunfilecheck)             Checksum: 12412F0D83DC46A16E369B5D40F1AA59;179.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 32674 strings out of 493013
+ 773058 string characters out of 6133344
+ 989121 words of memory out of 5000000
+ 35473 multiletter control sequences out of 15000+600000
+ 51350 words of font info for 50 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 64i,18n,98p,789b,2233s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
+texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/20
+16/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2016/texmf-dist/
+fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2016/texmf-dist/fonts/enc/
+dvips/lm/lm-mathex.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/l
+m/lmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmmi10.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmss10.pfb></usr/l
+ocal/texlive/2016/texmf-dist/fonts/type1/public/lm/lmss12.pfb></usr/local/texli
+ve/2016/texmf-dist/fonts/type1/public/lm/lmss8.pfb></usr/local/texlive/2016/tex
+mf-dist/fonts/type1/public/lm/lmsso10.pfb></usr/local/texlive/2016/texmf-dist/f
+onts/type1/public/lm/lmsso8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/lm/lmsy10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm
+/lmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10
+.pfb>
+Output written on Vortrag.pdf (34 pages, 574356 bytes).
+PDF statistics:
+ 1024 PDF objects out of 1200 (max. 8388607)
+ 939 compressed objects within 10 object streams
+ 74 named destinations out of 1000 (max. 500000)
+ 172 words of extra memory for PDF output out of 10000 (max. 10000000)
+
