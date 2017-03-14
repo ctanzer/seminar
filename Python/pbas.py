@@ -16,7 +16,7 @@ class PBAS(threading.Thread):
     R_arr = 0
 
     # INITIALIZATION ===============================================================
-    def __init__(self, N=10, nmbr_min=2, R_inc_dec=0.05, R_lower=18, R_scale=5, T_dec=0.1, T_inc=1, T_lower=2, T_upper=150, alpha=1):
+    def __init__(self, N=35, nmbr_min=2, R_inc_dec=0.05, R_lower=18, R_scale=5, T_dec=0.1, T_inc=1, T_lower=2, T_upper=150, alpha=1):
         threading.Thread.__init__(self)
 
         # Initialize Parameters

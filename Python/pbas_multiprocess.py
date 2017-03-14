@@ -4,6 +4,9 @@ from numpy import pi
 from multiprocessing import Process, Queue
 import time
 
+import rospy
+import cv_bridge
+
 class PBAS(Process):
 
     img = 0
@@ -16,6 +19,8 @@ class PBAS(Process):
     d_min_avg = 0
     pixel_probabilities = 0
     R_arr = 0
+    downsample = .5
+    dist = 0
 
     # INITIALIZATION ===============================================================
     def __init__(self, channel=1, N=10, nmbr_min=2, R_inc_dec=0.05, R_lower=18, R_scale=5, T_dec=0.1, T_inc=1, T_lower=2, T_upper=150, alpha=1):
@@ -67,8 +72,8 @@ class PBAS(Process):
 
         """
         # calculate the distance
-        return self.alpha/self.avg_grad*abs(self.grad[:,:,np.newaxis]-self.background_grad)\
-                + abs(self.img[:,:,np.newaxis] - self.background_pixel)
+        return self.alpha/self.avg_grad*np.abs(self.grad[:,:,np.newaxis]-self.background_grad)\
+                + np.abs(self.img[:,:,np.newaxis] - self.background_pixel)
 
     # DISTANCE =====================================================================
 
@@ -78,9 +83,10 @@ class PBAS(Process):
         """ Calculates the gradient magnitude an image
 
         """
-        grad_x, grad_y = np.gradient(self.img)
-        self.grad = cv2.magnitude(grad_x, grad_y)
-        self.avg_grad = np.average(self.grad)
+        sobelx = cv2.Sobel(self.img,cv2.CV_64F,dx=1,dy=0,ksize=1)
+        sobely = cv2.Sobel(self.img,cv2.CV_64F,dx=0,dy=1,ksize=1)
+        self.grad = np.sqrt(sobelx**2+sobely**2)
+        self.avg_grad = np.sum(self.grad)/(self.grad.shape[0]*self.grad.shape[1])
     # GRADIENT =====================================================================
 
 
@@ -88,6 +94,7 @@ class PBAS(Process):
     def decision(self):
         self.foreground = self.img*0
         d = self.distance()
+        self.dist = d
         self.d_min = np.amin(d, axis=2)
         comp = d<self.R_arr[:,:,np.newaxis]
         self.foreground[(comp != False).sum(2) < self.nmbr_min] = 255
@@ -164,6 +171,7 @@ class PBAS(Process):
             else:
                 self.img = image_queue_b.get()
 
+            self.img = cv2.resize(self.img,None,fx=self.downsample, fy=self.downsample, interpolation = cv2.INTER_AREA)
 
             if self.init == 0:
                 self.init = 1
@@ -182,9 +190,9 @@ class PBAS(Process):
                 self.d_min_avg = np.zeros((rows, cols))
 
                 # R_arr = np.zeros((rows, cols))
-                self.R_arr = np.ones((rows, cols))*self.R_scale
+                self.R_arr = np.ones((rows, cols))*self.R_lower
 
-                self.T_rate_arr = np.ones((rows,cols))*100
+                self.T_rate_arr = np.ones((rows,cols))*2
 
             # Random plane
             n = np.uint8(np.floor(self.N * np.random.random()))
@@ -201,14 +209,21 @@ class PBAS(Process):
 
             self.gradient()
             self.decision()
-            self.foreground = cv2.medianBlur(self.foreground, 15)
+            self.foreground = cv2.medianBlur(self.foreground, 9)
+            # self.foreground = cv2.medianBlur(cv2.resize(self.foreground,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR), 15)
 
             if self.channel == 0:
-                foreground_queue_r.put(self.foreground)
+                foreground_queue_r.put(cv2.resize(self.foreground,None,fx=1/self.downsample, \
+                                    fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
+                # temp_queue.put(cv2.resize(self.dist[:,:,0],None,fx=1/self.downsample,\
+                temp_queue.put(cv2.resize(self.grad,None,fx=1/self.downsample,\
+                                    fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
+                temp_queue.put(cv2.resize(self.background_grad[:,:,0],None,fx=1/self.downsample,\
+                                    fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
             elif self.channel == 1:
-                foreground_queue_g.put(self.foreground)
+                foreground_queue_g.put(cv2.resize(self.foreground,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
             else:
-                foreground_queue_b.put(self.foreground)
+                foreground_queue_b.put(cv2.resize(self.foreground,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
 
     # Main function =========================================================
     ################################################################################
@@ -239,6 +254,8 @@ if __name__ == '__main__':
     foreground_queue_g = Queue()
     foreground_queue_b = Queue()
 
+    temp_queue = Queue()
+
     # Create an instance per channel
     pbas_r = PBAS(ch_r, N, nmbr_min, R_inc_dec, R_lower, R_scale, T_dec, T_inc, T_lower, T_upper, alpha)
     pbas_g = PBAS(ch_g, N, nmbr_min, R_inc_dec, R_lower, R_scale, T_dec, T_inc, T_lower, T_upper, alpha)
@@ -247,6 +264,7 @@ if __name__ == '__main__':
     # Open VideoCapture; here i.e. 'highway.avi'
     cap = cv2.VideoCapture('highway.avi')
     once = 0
+    n_im = 0
 
     while True:
         start = time.time()
@@ -273,6 +291,16 @@ if __name__ == '__main__':
 
         cv2.imshow('orig', img)
         cv2.imshow('foreground', foreground)
+
+        print 'number: ', n_im
+        # cv2.imwrite('./pbas_bilder/foreground{:04d}.jpg'.format(n_im), foreground*255)
+        temp = temp_queue.get()
+        cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
+        # cv2.imwrite('./pbas_bilder/grad{:04d}.jpg'.format(n_im), temp)
+        temp = temp_queue.get()
+        # cv2.imwrite('./pbas_bilder/back_grad{:04d}.jpg'.format(n_im), temp)
+        cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
+        n_im += 1
 
         # Quit program pressing key 'q'
         if cv2.waitKey(10) & 0xFF == ord('q'):
