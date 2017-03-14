@@ -80,6 +80,7 @@ class PBAS(Process):
         """ Calculates the gradient magnitude an image
 
         """
+<<<<<<< Updated upstream
         sobelx = cv2.Sobel(self.img,cv2.CV_64F,dx=1,dy=0,ksize=1)
         sobely = cv2.Sobel(self.img,cv2.CV_64F,dx=0,dy=1,ksize=1)
         # sobelx = cv2.Sobel(self.img,ddepth=-1,dx=1,dy=0,ksize=5)
@@ -87,6 +88,13 @@ class PBAS(Process):
         self.grad = np.sqrt(sobelx**2+sobely**2)
         # self.avg_grad = np.average(self.grad)
         self.avg_grad = np.sum(self.grad)/(self.grad.shape[0] * self.grad.shape[1])
+=======
+        sobelx = cv2.Sobel(self.img,cv2.CV_64F,1,0,ksize=5)
+        sobely = cv2.Sobel(self.img,cv2.CV_64F,0,1,ksize=5)
+        self.grad = cv2.magnitude(sobelx, sobely).istype(np.float)
+        # self.avg_grad = np.average(self.grad)
+        self.avg_grad = np.sum(self.grad)/(self.grad.shape[0]*self.grad.shape[1])
+>>>>>>> Stashed changes
     # GRADIENT =====================================================================
 
 
