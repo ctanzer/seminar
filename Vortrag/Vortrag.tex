@@ -514,7 +514,8 @@
 	
 	\vspace{2em}
 	
-	$ F(x) = \left\{\begin{array}{ll} 1, & \#\left\{ Distanz < R \right\} < \#_{min} \\
+	$ F = \left\{\begin{array}{ll} 1, & \#\left\{ Distanz < R \right\} < \#_{min} \\
+				& \\
 				0, & sonst\end{array}\right. $
 \end{frame}
 
@@ -598,6 +599,7 @@
 	\begin{center}
 		\Large
 		$ R = \left\{\begin{array}{ll} R(1-R_{inc/dec}), & R < \overline{d}_{min}R_{scale} \\
+		& \\
 		R(1+R_{inc/dec}), & sonst\end{array}\right.  $
 	\end{center}
 	
@@ -630,7 +632,7 @@
 		\Large
 		$ T = 	\left\{\begin{array}{ll} T + \frac{T_{inc}}{\overline{d}_{min}}, & F = 1 \\
 				& \\
-				T + \frac{T_{dec}}{\overline{d}_{min}}, & F = 0\end{array}\right.  $
+				T - \frac{T_{dec}}{\overline{d}_{min}}, & F = 0\end{array}\right.  $
 	\end{center}
 \end{frame}
 
@@ -646,7 +648,7 @@
 		\begin{subfigure}{.4\linewidth}
 			\centering
 			\includegraphics[width=\linewidth]{./Bilder/update_bilder/updatearr1198}
-			\caption{Aktualisiuerungsrate}
+			\caption{Aktualisierungsrate}
 		\end{subfigure}
 	\end{figure}
 	\vspace{1em}
@@ -851,14 +853,6 @@
 	\vspace{1.3em}
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small8.jpg}
-	\end{figure}
-\end{frame}
-
-\begin{frame}[t]{Beispiel Ergebnis}
-	\vspace{1.3em}
-	\begin{figure}
-		\centering
 		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small9.jpg}
 	\end{figure}
 \end{frame}
@@ -873,7 +867,7 @@
 \begin{frame}[t]{Quellen}
 	\begin{itemize}
 		\item \url{http://changedetection.net}, aufgerufen am 17. Januar 2017
-		\item M.Hoffmann, P.Tiefenbacer and G. Rigoll: "Background Segmentation with feddback: The Pixel-Based Adaptive Segmenter,"2012 IEEE Computer Society Conference on Computer Vision and Pattern Recognition
+		\item M.Hoffmann, P.Tiefenbacer and G. Rigoll: "Background Segmentation with feedback: The Pixel-Based Adaptive Segmenter,"2012 IEEE Computer Society Conference on Computer Vision and Pattern Recognition
 		\item Pierre-Luc St-Charles,Guillaume-Alexandre Bilodeau and Robert Bergevin: "\,SuBSENSE: A Universal Change Detection Method With Local Adaptive Sensitivity,"\,in IEEE Transactions on Image Processing, vol. 24, no. 1, pp. 359-373, Januar 2015
 	\end{itemize}
 \end{frame}
