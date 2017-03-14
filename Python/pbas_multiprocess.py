@@ -4,6 +4,9 @@ from numpy import pi
 from multiprocessing import Process, Queue
 import time
 
+import rospy
+import cv_bridge
+
 class PBAS(Process):
 
     img = 0
