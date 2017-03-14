@@ -1,11 +1,18 @@
 import cv2
 import numpy as np
-from numpy import pi
-from multiprocessing import Process, Queue
+from multiprocessing import Process, Queue, Event
 import time
 
 import rospy
-import cv_bridge
+from sensor_msgs.msg import Image
+from cv_bridge import CvBridge
+
+# Get image from topic
+def callback_get_image(data):
+    global img, bridge
+    img = bridge.imgmsg_to_cv2(data)*1
+    # img = cv2.cvtColor(bridge.imgmsg_to_cv2(data), cv2.COLOR_BGR2RGB)
+
 
 class PBAS(Process):
 
@@ -166,10 +173,16 @@ class PBAS(Process):
         while True:
             if self.channel == 0:
                 self.img = image_queue_r.get()
+                if self.img == 'exit':
+                    break
             elif self.channel == 1:
                 self.img = image_queue_g.get()
+                if self.img == 'exit':
+                    break
             else:
                 self.img = image_queue_b.get()
+                if self.img == 'exit':
+                    break
 
             self.img = cv2.resize(self.img,None,fx=self.downsample, fy=self.downsample, interpolation = cv2.INTER_AREA)
 
@@ -212,18 +225,16 @@ class PBAS(Process):
             self.foreground = cv2.medianBlur(self.foreground, 9)
             # self.foreground = cv2.medianBlur(cv2.resize(self.foreground,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR), 15)
 
+            # Write foreground to main process
             if self.channel == 0:
                 foreground_queue_r.put(cv2.resize(self.foreground,None,fx=1/self.downsample, \
                                     fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
-                # temp_queue.put(cv2.resize(self.dist[:,:,0],None,fx=1/self.downsample,\
-                temp_queue.put(cv2.resize(self.grad,None,fx=1/self.downsample,\
-                                    fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
-                temp_queue.put(cv2.resize(self.background_grad[:,:,0],None,fx=1/self.downsample,\
-                                    fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
             elif self.channel == 1:
-                foreground_queue_g.put(cv2.resize(self.foreground,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
+                foreground_queue_g.put(cv2.resize(self.foreground,None,fx=1/self.downsample, \
+                                    fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
             else:
-                foreground_queue_b.put(cv2.resize(self.foreground,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
+                foreground_queue_b.put(cv2.resize(self.foreground,None,fx=1/self.downsample, \
+                                    fy=1/self.downsample, interpolation = cv2.INTER_LINEAR))
 
     # Main function =========================================================
     ################################################################################
@@ -262,16 +273,27 @@ if __name__ == '__main__':
     pbas_b = PBAS(ch_b, N, nmbr_min, R_inc_dec, R_lower, R_scale, T_dec, T_inc, T_lower, T_upper, alpha)
 
     # Open VideoCapture; here i.e. 'highway.avi'
-    cap = cv2.VideoCapture('highway.avi')
+    # cap = cv2.VideoCapture('highway.avi')
     once = 0
     n_im = 0
 
+    # ROS Interface
+    # Init Node
+    img = 0
+    rospy.init_node('PBAS')
+    bridge = CvBridge()
+    pbas_sub = rospy.Subscriber("zed_front_right/rgb/image_raw_color", Image, callback=callback_get_image, queue_size=10)
+    pbas_pub = rospy.Publisher("pbas_segmentation", Image, queue_size=10)
+
     while True:
         start = time.time()
-        # Read one frame of the video and break when error occurs (i.e. video ended)
-        ret, img = cap.read()
-        if ret == False:
-            break
+
+        while type(img) == int:
+            rospy.Rate.sleep(rospy.Rate(1))
+        # # Read one frame of the video and break when error occurs (i.e. video ended)
+        # ret, img = cap.read()
+        # if ret == False:
+        #     break
 
         image_queue_r.put(img[:,:,ch_r])
         image_queue_g.put(img[:,:,ch_g])
@@ -294,19 +316,30 @@ if __name__ == '__main__':
 
         print 'number: ', n_im
         # cv2.imwrite('./pbas_bilder/foreground{:04d}.jpg'.format(n_im), foreground*255)
-        temp = temp_queue.get()
-        cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
+        # temp = temp_queue.get()
+        # cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
         # cv2.imwrite('./pbas_bilder/grad{:04d}.jpg'.format(n_im), temp)
-        temp = temp_queue.get()
+        # temp = temp_queue.get()
         # cv2.imwrite('./pbas_bilder/back_grad{:04d}.jpg'.format(n_im), temp)
-        cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
+        # cv2.imshow('temp_queue', np.uint8(255*(temp - temp.min())/(temp.max()-temp.min())))
         n_im += 1
+
+        pbas_pub.publish(bridge.cv2_to_imgmsg(foreground))
 
         # Quit program pressing key 'q'
         if cv2.waitKey(10) & 0xFF == ord('q'):
+            image_queue_r.put('exit')
+            image_queue_g.put('exit')
+            image_queue_b.put('exit')
+
+            time.sleep(1)
+
             break
 
         print 'FPS: ', 1/(time.time() - start)
+
+    pbas_sub.unregister()
+    pbas_pub.unregister()
 
     foreground_queue_r.close()
     foreground_queue_g.close()
@@ -320,5 +353,12 @@ if __name__ == '__main__':
     pbas_g.terminate()
     pbas_b.terminate()
 
-    cap.release()
+    if not pbas_r.is_alive():
+        print 'pbas_r terminated'
+    if not pbas_g.is_alive():
+        print 'pbas_g terminated'
+    if not pbas_b.is_alive():
+        print 'pbas_b terminated'
+    # cap.release()
     cv2.destroyAllWindows()
+    print 'All windows destroyed!'
