@@ -271,7 +271,11 @@ class SUBSENSE(Process):
                     break
 
             self.init
+            
+            # Create small version of the input picture
             self.img = cv2.resize(self.img,None,fx=self.downsample, fy=self.downsample, interpolation = cv2.INTER_AREA)
+
+            # INIT ----------------------------------------------
             if self.init == 0:
                 self.init = 1
 
@@ -308,24 +312,37 @@ class SUBSENSE(Process):
                 self.color()
                 self.old_background = self.color_decision
                 self.color_decision_blured = cv2.medianBlur(self.color_decision, 5)
+            # INIT ----------------------------------------------
 
-
-
+            # Update grid pictures
             self.update_grid_pictures()
+            # LBSP Decision
             self.lbsp()
+            # Segmentation
             self.background = self.lbsp_decision&self.color_decision;
+            # Update of the Background Model
             self.background_update()
+            # Color Decision
             self.color()
+            # Median Filter
             self.color_decision_blured = cv2.medianBlur(self.color_decision, 5)
-
+            
+            # Distance Update
             self.distance_update()
+            # Blinking Pixels
             self.recognize_blinking_pixels()
+            # Update Threshold
             self.threshold_update()
+            # Update Probability
             self.probability_update()
+            
+            # Background filter 
             self.background = cv2.medianBlur(self.background, 3)
-
+            
+            # Resized Image of the background
             self.large_background = cv2.medianBlur(cv2.resize(self.background,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR),3)
 
+            # Return pictures to the main process
             if( self.channel == 1):
                 background_queue_r.put(self.background)
                 background_queue_r.put(self.large_background)
@@ -382,6 +399,7 @@ if __name__ == '__main__':
 
     # ROS Interface
     # Init Node
+    # ROS Topic muss vom Typ sensor_msgs.msg.Image sein
     img = 0
     rospy.init_node('SUBSENSE')
     bridge = CvBridge()
@@ -395,16 +413,19 @@ if __name__ == '__main__':
         while type(img) == int:
             rospy.Rate.sleep(rospy.Rate(1))
 
+        # Write image channels to the queues
         image_queue_r.put(img[:,:,0])
         image_queue_g.put(img[:,:,1])
         image_queue_b.put(img[:,:,2])
-
+        
+        # Start the processes once
         if once == 0:
             once = 1
             subsense_r.start()
             subsense_g.start()
             subsense_b.start()
 
+        # Read back the segmentation result
         background = np.logical_or(np.logical_or(background_queue_r.get(), background_queue_g.get()), background_queue_b.get()) * 1.
         large_background = np.logical_or(np.logical_or(background_queue_r.get(), background_queue_g.get()), background_queue_b.get()) * 1.
 
@@ -431,6 +452,8 @@ if __name__ == '__main__':
         fps  = 1 / seconds;
         print "Estimated frames per second : {0}".format(fps);
 
+
+    # Terminate everything
     subsense_sub.unregister()
     subsense_pub.unregister()
 
