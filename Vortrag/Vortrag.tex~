@@ -13,6 +13,8 @@
 
 \usepackage{caption}
 
+\usepackage{subcaption}
+\usepackage{color}
 \usepackage{pgfplots}
 
 \usepackage{tikz}
@@ -118,8 +120,8 @@
 		\begin{minipage}{0.45\linewidth}
 			\centering
 			\begin{tikzpicture}[scale=0.5]
-				\node(5) at (2,3) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
-				\node(4) at (1,2) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
+				\node(5) at (2,3.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
+				\node(4) at (1,2.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
 				\node(3) at (0,1.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
 				\node(2) at (-1,0.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
 				\node(1) at (-2,-0.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
@@ -135,11 +137,16 @@
 	\bigskip
 	\bigskip
 
+	\begin{equation*}
+		Distanz = |Bild - Referenz|
+	\end{equation*}
+
+	\bigskip
 
 	\begin{equation*}
 		S_t(x)= \left\{
 				\begin{array}{ll} 
-					1, &  \# (|I_t(x) - B_n(x)| < R, \forall n) < \# min\\
+					1, &  \# ( Distanz < R, \forall n) < \# min\\
 					\\
 					0, & sonst
 				\end{array}
@@ -154,7 +161,7 @@
 
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.6\linewidth]{Abbildungen/Farb_Vergleich.pdf}
+		\includegraphics[width=0.6\linewidth]{Abbildungen/Farb_Vergleich2.pdf}
 		\label{fig:Abbildungen/Grid}
 	\end{figure}
 	\centering
@@ -167,14 +174,18 @@
 	\bigskip
 	\bigskip
 	\bigskip
+	\color{red}
 	15 $<$ R$_{color} \rightarrow$ 1
 
 	\bigskip
+	\color{green}
 	30 $>$ R$_{color} \rightarrow$ 0
 	
 	\bigskip
+	\color{blue}
 	80 $>$ R$_{color} \rightarrow$ 0
 
+	\color{black}
 	\bigskip
 	\bigskip
 	$\Rightarrow$ einmal pro Referenzwert im Hintergrundmodell
@@ -212,6 +223,53 @@
 \end{frame}
 
 
+\begin{frame}[t]{LBSP -- Hintergrundmodell}
+	\bigskip
+	\bigskip
+	\vspace{1em}
+	\centering
+	\begin{minipage}{0.43\linewidth}
+		\centering
+		\vspace{5.5em}
+
+		1\quad0\quad 0\quad 1
+		
+		\vspace{5.5em}
+		Eingangsstring
+	\end{minipage}
+	\begin{minipage}{0.08\linewidth}
+		\begin{figure}% 
+			\centering
+			\includegraphics[width=0.8\linewidth]{Abbildungen/Pfeil.pdf}
+			\vspace{1em}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}{0.43\linewidth} 
+		\centering 
+		1. 1\quad 1\quad 0\quad 1
+		\bigskip
+		
+		2. 0\quad 1\quad 0\quad 1
+		\bigskip
+		
+		3. 1\quad 1\quad 1\quad 1
+		\bigskip
+		
+		...
+		\bigskip
+
+		N. 1\quad1\quad0\quad0
+		\bigskip
+		
+		\vspace{1em}
+		Hintergrundmodell
+
+
+	\end{minipage}
+
+\end{frame}
+
+
 \begin{frame}[t]{LBSP -- Raster}
 	\centering
 	\begin{figure}
@@ -229,7 +287,7 @@
 
 	\begin{figure}
 		\centering
-		\includegraphics[width=0.6\linewidth]{Abbildungen/Farb_Vergleich.pdf}
+		\includegraphics[width=0.6\linewidth]{Abbildungen/Farb_Vergleich2.pdf}
 		\label{fig:Abbildungen/Grid}
 	\end{figure}
 	\centering
@@ -343,9 +401,34 @@
 	\begin{equation*}
 		v(x)= 	\left\{
 				\begin{array}{ll} 
-					v(x) + v_{incr}, &  X(t) \oplus X(t-1) \\
+					v(x) + v_{incr}, &  S(t) \oplus S(t-1) \\
 					\\
 					v(x) - v_{decr}, & sonst
+				\end{array}
+			\right .
+	\end{equation*}
+\end{frame}
+
+\begin{frame}[t]{Aktualisierung des Modells -- Aktualisierungsrate}
+	\vspace{1.65em}
+	\begin{figure}
+		\centering
+		\begin{minipage}{0.45\linewidth}
+			\includegraphics[width=1\linewidth]{Abbildungen/Eingang3.jpg}
+			\caption*{Eingangsbild}
+		\end{minipage}
+		\begin{minipage}{0.45\linewidth}
+			\includegraphics[width=1\linewidth]{Abbildungen/threshold.jpg}
+			\caption*{Aktualisierungsrate}
+		\end{minipage}
+	\end{figure}
+	\bigskip
+	\begin{equation*}
+		T(x)= 	\left\{
+				\begin{array}{ll} 
+					T(x) + \frac{1}{v(x)\cdot D_{min}(x)}, &  S_t(x) = 1 \\
+					\\
+					T(x) - \frac{v(x)}{D_{min}(x)}, &  S_t(x) = 0 \\
 				\end{array}
 			\right .
 	\end{equation*}
@@ -360,35 +443,15 @@
 			\caption*{Eingangsbild}
 		\end{minipage}
 		\begin{minipage}{0.45\linewidth}
-			\includegraphics[width=1\linewidth]{Abbildungen/threshold.jpg}
-			\caption*{Reziproke Wahrscheinlichkeit}
-		\end{minipage}
-	\end{figure}
-	\bigskip
-	\begin{equation*}
-		T(x)= 	\left\{
-				\begin{array}{ll} 
-					T(x) + \frac{1}{v(x)\cdot D_{min}(x)}, &  S_t(x) = 1 \\
-					\\
-					T(x) + \frac{v(x)}{D_{min}(x)}, &  S_t(x) = 0 \\
-				\end{array}
-			\right .
-	\end{equation*}
-\end{frame}
-
-\begin{frame}[t]{Aktualisierung des Modells -- Aktualisierung}
-	\vspace{1.65em}
-	\begin{figure}
-		\centering
-		\begin{minipage}{0.45\linewidth}
-			\includegraphics[width=1\linewidth]{Abbildungen/Eingang3.jpg}
-			\caption*{Eingangsbild}
-		\end{minipage}
-		\begin{minipage}{0.45\linewidth}
 			\includegraphics[width=1\linewidth]{Abbildungen/update_array.jpg}
 			\caption*{Aktualisierungsarray}
 		\end{minipage}
 	\end{figure}
+
+	\begin{equation*}
+		Wahrscheinlichkeit = \frac{1}{Aktualisierungsrate}	
+	\end{equation*}
+
 \end{frame}
 
 
@@ -402,7 +465,7 @@
 			\caption*{Eingangsbild}
 		\end{minipage}
 		\begin{minipage}{0.45\linewidth}
-			\includegraphics[width=1\linewidth]{Abbildungen/R.jpg}
+			\includegraphics[width=1\linewidth]{Abbildungen/R2.jpg}
 			\caption*{Schwellwert}
 		\end{minipage}
 	\end{figure}
@@ -870,10 +933,9 @@
 
 \begin{frame}[t]{Quellen}
 	\begin{itemize}
-		\item \url{http://www.stern.de/kultur/photoshop-oder-bodypainting--der-kuenstler-liu-bolin-macht-menschen-unsichtbar-6618586.html}, aufgerufen am 1. Dezember 2016
-		\item \url{http://www.sueddeutsche.de/auto/autonomes-fahren-was-autonome-autos-koennen-und-was-nicht-1.3062258}, aufgerufen am 1. Dezember 2016
-		\item Rafael C. Gonzalez, Richard E. Woods: "Digital Image Processing", Addison-Wesley Publishing Company, 1992
-		\item Pierre-Luc St-Charles,Guillaume-Alexandre Bilodeau and Robert Bergevin: "SuBSENSE: A Universal Change Detection Method With Local Adaptive Sensitivity" in IEEE Transactions on Image Processing, vol. 24, no. 1, pp. 359-373, Januar 2015
+		\item \url{http://changedetection.net}, aufgerufen am 17. Januar 2017
+		\item M.Hoffmann, P.Tiefenbacer and G. Rigoll: "Background Segmentation with feddback: The Pixel-Based Adaptive Segmenter,"2012 IEEE Computer Society Conference on Computer Vision and Pattern Recognition
+		\item Pierre-Luc St-Charles,Guillaume-Alexandre Bilodeau and Robert Bergevin: "\,SuBSENSE: A Universal Change Detection Method With Local Adaptive Sensitivity,"\,in IEEE Transactions on Image Processing, vol. 24, no. 1, pp. 359-373, Januar 2015
 	\end{itemize}
 \end{frame}
 

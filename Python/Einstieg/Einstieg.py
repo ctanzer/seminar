@@ -13,8 +13,11 @@ while True:
     cv2.imshow('+', original/2+blured/2)
     cv2.imshow('test',(original/2+blured/2)[20:rows-50,0:cols-50,:])
     
-    cv2.imwrite('original_small',original[20:rows-50,0:cols-50,:])
-    cv2.imwrite('overlay_small',(original/2+blured/2)[20:rows-50,0:cols-50,:])
+    original_small = original[20:rows-50,0:cols-50,:]
+    overlay_small = (original/2+blured/2)[20:rows-50,0:cols-50,:]
+
+    cv2.imwrite('original_small.jpg',original_small)
+    cv2.imwrite('overlay_small.jpg', overlay_small)
 
     if cv2.waitKey(10) & 0xFF == ord('q'):
         break

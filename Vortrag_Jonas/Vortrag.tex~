@@ -29,6 +29,15 @@
 	\maketitle
 \end{frame}
 
+
+\begin{frame}[t]{Einstieg}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small.jpg}
+	\end{figure}
+\end{frame}
+
 \setcounter{framenumber}{0}
 \addtobeamertemplate{navigation symbols}{}{
 \usebeamerfont{footline}
@@ -40,7 +49,6 @@
 \begin{frame}[t]{Inhaltsverzeichnis}
 	\tableofcontents[] 
 \end{frame}
-
 
 \title{Self-Balanced SENsitivity SEgmenter}   
 \author{Jonas Bühlmeyer} 
@@ -82,6 +90,44 @@
 	\end{figure}
 \end{frame}
 
+%\begin{frame}[t]{Hintergrundmodell}
+%	\bigskip
+%	\bigskip
+%	\begin{figure}
+%		\centering
+%		\includegraphics[width=0.95\linewidth]{Abbildungen/modell.pdf}
+%		\label{fig:Abbildungen/Grid}
+%	\end{figure}
+%\end{frame}
+
+\begin{frame}[t]{Hintergrundmodell -- vereinfachtes Beispiel}
+	\bigskip
+	\bigskip
+	\begin{figure}% 
+		\centering
+		\begin{minipage}{0.35\linewidth}
+			\centering
+			\includegraphics[width=0.8\linewidth]{Abbildungen/Eingang1.jpg}\\
+			\includegraphics[width=0.8\linewidth]{Abbildungen/Eingang2.jpg}
+			\caption*{Eingangsbilder}
+		\end{minipage}
+		\begin{minipage}{0.08\linewidth}
+			\centering
+			\includegraphics[width=0.8\linewidth]{Abbildungen/Pfeil.pdf}
+		\end{minipage}
+		\begin{minipage}{0.45\linewidth}
+			\centering
+			\begin{tikzpicture}[scale=0.5]
+				\node(5) at (2,3) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
+				\node(4) at (1,2) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
+				\node(3) at (0,1.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
+				\node(2) at (-1,0.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
+				\node(1) at (-2,-0.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
+			\end{tikzpicture}
+			\caption*{Hintergrundmodell}
+		\end{minipage}
+	\end{figure}
+\end{frame}
 
 
 \begin{frame}[t]{Farbvergleich -- Entscheidung }
@@ -93,7 +139,8 @@
 	\begin{equation*}
 		S_t(x)= \left\{
 				\begin{array}{ll} 
-					1, &  \# (I_t(x) - B_n(x) < R, \forall n) < \# min\\
+					1, &  \# (|I_t(x) - B_n(x)| < R, \forall n) < \# min\\
+					\\
 					0, & sonst
 				\end{array}
 			\right .
@@ -120,13 +167,13 @@
 	\bigskip
 	\bigskip
 	\bigskip
-	15 $<$ R$_{color} \rightarrow$ Hintergrund
+	15 $<$ R$_{color} \rightarrow$ 1
 
 	\bigskip
-	30 $>$ R$_{color} \rightarrow$ Vordergrund
+	30 $>$ R$_{color} \rightarrow$ 0
 	
 	\bigskip
-	80 $>$ R$_{color} \rightarrow$ Vordergrund
+	80 $>$ R$_{color} \rightarrow$ 0
 
 	\bigskip
 	\bigskip
@@ -196,20 +243,20 @@
 	\bigskip
 	\bigskip
 	\bigskip
-	15 $<$ R$_{lbsp} \rightarrow$ Hintergrund
+	15 $<$ R$_{lbsp} \rightarrow$ 0
 
 	\bigskip
-	30 $>$ R$_{lbsp} \rightarrow$ Vordergrund
+	30 $>$ R$_{lbsp} \rightarrow$ 1
 	
 	\bigskip
-	80 $>$ R$_{lbsp} \rightarrow$ Vordergrund
+	80 $>$ R$_{lbsp} \rightarrow$ 1
 
 	\bigskip
 	\bigskip
 	$\Rightarrow$ einmal pro Referenzwert im Raster
 	\bigskip
 	
-	$\Rightarrow$ Referenz: 1 1 1 0\quad1 1 1 1\quad 0 0 1 1\quad 1 1 1 1
+	$\Rightarrow$ LBS: 1 1 1 0\quad1 1 1 1\quad 0 0 1 1\quad 1 1 1 1
 
 \end{frame}
 
@@ -221,10 +268,10 @@
 		\label{tab:label}
 		\renewcommand{\arraystretch}{2}
 		\begin{tabular}{lc}
-			Referenz& 	1 1 1 0\quad 1 1 1 1\quad 0 0 1 1\quad 1 1 1 1\\
-			Pixel 1& 	1 1 0 0\quad 1 1 1 1\quad 0 0 1 1\quad 1 0 0 0\\
+			LBS& 	1 1 1 0\quad 1 1 1 1\quad 0 0 1 1\quad 1 1 1 1\\
+			Modell Referenz 1& 	1 1 0 0\quad 1 1 1 1\quad 0 0 1 1\quad 1 0 0 0\\
 			& 		$\Rightarrow$ 12/16 $\rightarrow$ Hintergrund\\
-			Pixel 2& 	0 0 0 0\quad 1 0 1 1\quad 0 1 0 0\quad 0 0 0 1\\
+			Modell Referenz 2& 	0 0 0 0\quad 1 0 1 1\quad 0 1 0 0\quad 0 0 0 1\\
 			& 		$\Rightarrow$ 5/16 $\rightarrow$ Vordergrund\\
 		\end{tabular}
 	\end{table}
@@ -245,46 +292,6 @@
 	\end{figure}
 \end{frame}
 
-
-
-\begin{frame}[t]{Hintergrundmodell}
-	\bigskip
-	\bigskip
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.95\linewidth]{Abbildungen/modell.pdf}
-		\label{fig:Abbildungen/Grid}
-	\end{figure}
-\end{frame}
-
-\begin{frame}[t]{Hintergrundmodell -- Beispiel}
-	\bigskip
-	\bigskip
-	\begin{figure}% 
-		\centering
-		\begin{minipage}{0.35\linewidth}
-			\centering
-			\includegraphics[width=0.8\linewidth]{Abbildungen/Eingang1.jpg}\\
-			\includegraphics[width=0.8\linewidth]{Abbildungen/Eingang2.jpg}
-			\caption*{Eingangsbilder}
-		\end{minipage}
-		\begin{minipage}{0.08\linewidth}
-			\centering
-			\includegraphics[width=0.8\linewidth]{Abbildungen/Pfeil.pdf}
-		\end{minipage}
-		\begin{minipage}{0.45\linewidth}
-			\centering
-			\begin{tikzpicture}[scale=0.5]
-				\node(5) at (2,3) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
-				\node(4) at (1,2) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
-				\node(3) at (0,1.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
-				\node(2) at (-1,0.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
-				\node(1) at (-2,-0.5) {\includegraphics[width=0.7\linewidth]{Abbildungen/Hintergrund.jpg}};
-			\end{tikzpicture}
-			\caption*{Hintergrundmodell}
-		\end{minipage}
-	\end{figure}
-\end{frame}
 
 
 
@@ -337,11 +344,54 @@
 		v(x)= 	\left\{
 				\begin{array}{ll} 
 					v(x) + v_{incr}, &  X(t) \oplus X(t-1) \\
+					\\
 					v(x) - v_{decr}, & sonst
 				\end{array}
 			\right .
 	\end{equation*}
 \end{frame}
+
+\begin{frame}[t]{Aktualisierung des Modells -- Wahrscheinlichkeit}
+	\vspace{1.65em}
+	\begin{figure}
+		\centering
+		\begin{minipage}{0.45\linewidth}
+			\includegraphics[width=1\linewidth]{Abbildungen/Eingang3.jpg}
+			\caption*{Eingangsbild}
+		\end{minipage}
+		\begin{minipage}{0.45\linewidth}
+			\includegraphics[width=1\linewidth]{Abbildungen/threshold.jpg}
+			\caption*{Schwellwert}
+		\end{minipage}
+	\end{figure}
+	\bigskip
+	\begin{equation*}
+		T(x)= 	\left\{
+				\begin{array}{ll} 
+					T(x) + \frac{1}{v(x)\cdot D_{min}(x)}, &  S_t(x) = 1 \\
+					\\
+					T(x) + \frac{v(x)}{D_{min}(x)}, &  S_t(x) = 0 \\
+				\end{array}
+			\right .
+	\end{equation*}
+\end{frame}
+
+\begin{frame}[t]{Aktualisierung des Modells -- Aktualisierung}
+	\vspace{1.65em}
+	\begin{figure}
+		\centering
+		\begin{minipage}{0.45\linewidth}
+			\includegraphics[width=1\linewidth]{Abbildungen/Eingang3.jpg}
+			\caption*{Eingangsbild}
+		\end{minipage}
+		\begin{minipage}{0.45\linewidth}
+			\includegraphics[width=1\linewidth]{Abbildungen/update_array.jpg}
+			\caption*{Aktualisierungsarray}
+		\end{minipage}
+	\end{figure}
+\end{frame}
+
+
 
 \begin{frame}[t]{Aktualisierung des Modells -- Schwellwert}
 	\vspace{1.65em}
@@ -361,6 +411,7 @@
 		R(x)= 	\left\{
 				\begin{array}{ll} 
 					R(x) + v(x), &  R(x) < (1 + D_{min}(x) \cdot 2)^2 \\
+					\\
 					R(x) - \frac{1}{v(x)}, & sonst
 				\end{array}
 			\right .
@@ -404,44 +455,6 @@
 	\end{equation*}
 \end{frame}
 
-\begin{frame}[t]{Aktualisierung des Modells -- Wahrscheinlichkeit}
-	\vspace{1.65em}
-	\begin{figure}
-		\centering
-		\begin{minipage}{0.45\linewidth}
-			\includegraphics[width=1\linewidth]{Abbildungen/Eingang3.jpg}
-			\caption*{Eingangsbild}
-		\end{minipage}
-		\begin{minipage}{0.45\linewidth}
-			\includegraphics[width=1\linewidth]{Abbildungen/threshold.jpg}
-			\caption*{Schwellwert}
-		\end{minipage}
-	\end{figure}
-	\bigskip
-	\begin{equation*}
-		T(x)= 	\left\{
-				\begin{array}{ll} 
-					T(x) + \frac{1}{v(x)\cdot D_{min}(x)}, &  S_t(x) = 1 \\
-					T(x) + \frac{v(x)}{D_{min}(x)}, &  S_t(x) = 0 \\
-				\end{array}
-			\right .
-	\end{equation*}
-\end{frame}
-
-\begin{frame}[t]{Aktualisierung des Modells -- Aktualisierung}
-	\vspace{1.65em}
-	\begin{figure}
-		\centering
-		\begin{minipage}{0.45\linewidth}
-			\includegraphics[width=1\linewidth]{Abbildungen/Eingang3.jpg}
-			\caption*{Eingangsbild}
-		\end{minipage}
-		\begin{minipage}{0.45\linewidth}
-			\includegraphics[width=1\linewidth]{Abbildungen/update_array.jpg}
-			\caption*{Aktualisierungsarray}
-		\end{minipage}
-	\end{figure}
-\end{frame}
 
 \begin{frame}[t]{Gesamtalgorithmus -- Beispiel}
 	\vspace{1.65em}
@@ -581,6 +594,100 @@
 	
 \end{frame}
 
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/overlay_small.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small1.jpg}
+	\end{figure}
+\end{frame}
+
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small2.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small3.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small4.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small5.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small6.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small7.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small8.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[t]{Beispiel Ergebnis}
+	\vspace{1.3em}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.8\linewidth]{Abbildungen/Einstieg/original_small9.jpg}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\centering
+	\vspace{3em}
+	\large{Vielen Dank für Ihre Aufmerksamkeit}
+\end{frame}
 
 
 \begin{frame}[t]{Quellen}

@@ -10,8 +10,8 @@ N_grid = 16
 nmbr_min_lbsp = 12
 MAX_hamming_weight = 0
 
-N_back = 50
-nmbr_min_back = 2
+N_color = 50
+nmbr_min_color = 2
 R = 10
 # pan
 #R_color =50
@@ -19,7 +19,6 @@ R = 10
 R_color = 30
 R_lbsp = 3
 
-T_update = 2
 T_lower = 2
 T_upper = 256
 
@@ -30,7 +29,7 @@ alpha = 0.03
 v_incr = 1
 v_decr = 0.1
 
-downsample = 0.7
+downsample = 0.5
 
 # LBSP-UPDATE GRID PICTURES ==========================================================
 def update_grid_pictures(img, grid_pictures, rows, cols):
@@ -70,7 +69,7 @@ def update_grid_pictures(img, grid_pictures, rows, cols):
 # LBSP-UPDATE GRID PICTURES ==========================================================
 
 # LBSP DECISION =================================================================
-def lbsp(img, grid_pictures, background_pictures, lbsp_background_model):
+def lbsp(img, grid_pictures, lbsp_background_model):
     global T_r, R_lbsp_arr
     grid_decision = grid_pictures - img[:,:,np.newaxis]
     lbsp_decision = img*0+255
@@ -87,7 +86,7 @@ def lbsp(img, grid_pictures, background_pictures, lbsp_background_model):
 def color(img,color_pictures, R_color_arr):
     color_decision = img*0
     comp = np.absolute(img[:,:,np.newaxis] - color_pictures) < R_color_arr[:,:,np.newaxis]
-    color_decision[(comp != False).sum(2) <= nmbr_min_back] = 255;
+    color_decision[(comp != False).sum(2) <= nmbr_min_color] = 255;
     return color_decision
 # COLOR DECISION ====================================================================
 
@@ -95,7 +94,7 @@ def color(img,color_pictures, R_color_arr):
 def background_update(img, background, color_pictures, T_arr, grid_pictures, lbsp_background_model):
     global T_r 
     
-    n = np.uint8(np.floor(N_back*np.random.random()))
+    n = np.uint8(np.floor(N_color*np.random.random()))
     # Random pixels with probability 1/T_arr
     rand_array = 100.*np.random.random(img.shape)
     update_array = np.logical_and(((100/T_arr) > rand_array), background == 0)
@@ -215,7 +214,7 @@ update_grid_pictures(img, grid_pictures, rows, cols)
 model_decision = grid_pictures - img[:,:,np.newaxis]
 T = T_r * img
 model = model_decision<T[:,:,np.newaxis]
-lbsp_background_model = np.ones((rows,cols,N_back,N_grid), dtype=bool)*model[:,:,np.newaxis,:]
+lbsp_background_model = np.ones((rows,cols,N_color,N_grid), dtype=bool)*model[:,:,np.newaxis,:]
 
 d_min_new = img*255
 d_min_arr = np.ones((rows, cols))
@@ -230,7 +229,7 @@ v_arr = img*0.0
 
 threshold_update(v_arr, d_min_arr)
 
-color_pictures = np.uint8(np.ones((rows, cols, N_back)) * img[:,:,np.newaxis])
+color_pictures = np.uint8(np.ones((rows, cols, N_color)) * img[:,:,np.newaxis])
 color_decision = color(img, color_pictures, R_color_arr)
 old_background = color_decision
 blured = cv2.medianBlur(color_decision, 9)
@@ -248,7 +247,7 @@ while True:
     img = cv2.resize(img,None,fx=downsample, fy=downsample, interpolation = cv2.INTER_CUBIC)
 
     update_grid_pictures(img, grid_pictures, rows, cols)
-    lbsp_decision = lbsp(img, grid_pictures, color_pictures,lbsp_background_model)
+    lbsp_decision = lbsp(img, grid_pictures,lbsp_background_model)
     background = lbsp_decision&color_decision;
     background_update(img, background, color_pictures, T_arr,grid_pictures,lbsp_background_model)
     color_decision = color(img, color_pictures, R_color_arr)

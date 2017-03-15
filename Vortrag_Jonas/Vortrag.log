@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.9)  14 MAR 2017 17:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2017.2.9)  14 MAR 2017 19:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1171,284 +1171,279 @@ your preamble.
 
 (./Vortrag.nav) [1
 
-{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Vort
-rag.toc) [2
+{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<Abbildungen/Einstieg/original_small.jpg, id=57, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small.jpg used on input 
+line 39.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [2
+
+ <./Abbildungen/Einstieg/original_small.jpg>] (./Vortrag.toc) [3
 
 ]
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 46.
+(hyperref)                setting the option has no effect on input line 54.
 
-[3
+[4
 
-] <Abbildungen/multiprocess.pdf, id=112, 403.5075pt x 314.17375pt>
+] <Abbildungen/multiprocess.pdf, id=139, 403.5075pt x 314.17375pt>
 File: Abbildungen/multiprocess.pdf Graphic file (type pdf)
 
 <use Abbildungen/multiprocess.pdf>
-Package pdftex.def Info: Abbildungen/multiprocess.pdf used on input line 63.
+Package pdftex.def Info: Abbildungen/multiprocess.pdf used on input line 71.
 (pdftex.def)             Requested size: 245.83282pt x 191.406pt.
- [4
+ [5
 
  <./Abbildungen/multiprocess.pdf>]
-<Abbildungen/gesamt.pdf, id=143, 648.4225pt x 186.6975pt>
+<Abbildungen/gesamt.pdf, id=169, 648.4225pt x 186.6975pt>
 File: Abbildungen/gesamt.pdf Graphic file (type pdf)
 
 <use Abbildungen/gesamt.pdf>
-Package pdftex.def Info: Abbildungen/gesamt.pdf used on input line 74.
+Package pdftex.def Info: Abbildungen/gesamt.pdf used on input line 82.
 (pdftex.def)             Requested size: 307.28987pt x 88.47711pt.
 pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
 en/Grid}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.74 \end{frame}
-                 [5
+l.82 \end{frame}
+                 [6
 
  <./Abbildungen/gesamt.pdf>]
-<Abbildungen/Konzept.pdf, id=172, 293.095pt x 269.005pt>
+<Abbildungen/Konzept.pdf, id=198, 293.095pt x 269.005pt>
 File: Abbildungen/Konzept.pdf Graphic file (type pdf)
 
 <use Abbildungen/Konzept.pdf>
-Package pdftex.def Info: Abbildungen/Konzept.pdf used on input line 83.
+Package pdftex.def Info: Abbildungen/Konzept.pdf used on input line 91.
 (pdftex.def)             Requested size: 184.3758pt x 169.21954pt.
 pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
 en/Grid}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.83 \end{frame}
-                 [6
+l.91 \end{frame}
+                 [7
 
  <./Abbildungen/Konzept.pdf>]
-LaTeX Font Info:    Try loading font information for OT1+lmss on input line 101
+<Abbildungen/Eingang1.jpg, id=228, 321.2pt x 240.9pt>
+File: Abbildungen/Eingang1.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang1.jpg>
+Package pdftex.def Info: Abbildungen/Eingang1.jpg used on input line 130.
+(pdftex.def)             Requested size: 86.04298pt x 64.53291pt.
+
+<Abbildungen/Eingang2.jpg, id=229, 321.2pt x 240.9pt>
+File: Abbildungen/Eingang2.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang2.jpg>
+Package pdftex.def Info: Abbildungen/Eingang2.jpg used on input line 130.
+(pdftex.def)             Requested size: 86.04298pt x 64.53291pt.
+LaTeX Font Info:    Try loading font information for OT1+lmss on input line 130
 .
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/ot1lmss.fd
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 101.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 130.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 101
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 130
 .
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 101
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 130
 .
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 101.
+(Font)              <10.95> on input line 130.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 101.
+(Font)              <8> on input line 130.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 101.
-LaTeX Font Info:    Try loading font information for U+msa on input line 101.
+(Font)              <6> on input line 130.
+LaTeX Font Info:    Try loading font information for U+msa on input line 130.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 101.
+LaTeX Font Info:    Try loading font information for U+msb on input line 130.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <10.95> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 101.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 130.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <8> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 101.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 130.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <6> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 101.
- [7
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 130.
+
+<Abbildungen/Pfeil.pdf, id=230, 45.04408pt x 53.52959pt>
+File: Abbildungen/Pfeil.pdf Graphic file (type pdf)
+
+<use Abbildungen/Pfeil.pdf>
+Package pdftex.def Info: Abbildungen/Pfeil.pdf used on input line 130.
+(pdftex.def)             Requested size: 19.66705pt x 23.37175pt.
+
+<Abbildungen/Hintergrund.jpg, id=231, 321.2pt x 240.9pt>
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+
+<use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 130.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+ <use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 130.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+
+<use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 130.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+ <use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 130.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
+
+<use Abbildungen/Hintergrund.jpg>
+Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 130.
+(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
+
+Overfull \hbox (22.72038pt too wide) in paragraph at lines 130--130
+ [][] 
+ []
+
+[8
+
+ <./Abbildungen/Eingang1.jpg> <./Abbildungen/Eingang2.jpg> <./Abbildungen/Pfeil
+.pdf> <./Abbildungen/Hintergrund.jpg>] [9
 
 ]
-<Abbildungen/Farb_Vergleich.pdf, id=233, 217.81375pt x 92.345pt>
+<Abbildungen/Farb_Vergleich.pdf, id=298, 217.81375pt x 92.345pt>
 File: Abbildungen/Farb_Vergleich.pdf Graphic file (type pdf)
 
 <use Abbildungen/Farb_Vergleich.pdf>
-Package pdftex.def Info: Abbildungen/Farb_Vergleich.pdf used on input line 116.
+Package pdftex.def Info: Abbildungen/Farb_Vergleich.pdf used on input line 163.
 
 (pdftex.def)             Requested size: 184.3758pt x 78.1681pt.
 pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
 en/Grid}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.116 \end{frame}
-                  [8
+l.163 \end{frame}
+                  [10
 
- <./Abbildungen/Farb_Vergleich.pdf>] [9
+ <./Abbildungen/Farb_Vergleich.pdf>] [11
 
 ]
-<Abbildungen/Eingang3.jpg, id=288, 321.2pt x 240.9pt>
+<Abbildungen/Eingang3.jpg, id=352, 321.2pt x 240.9pt>
 File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
 
 <use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 156.
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 203.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
 
-<Abbildungen/color_decision.jpg, id=289, 224.84pt x 168.63pt>
+<Abbildungen/color_decision.jpg, id=353, 224.84pt x 168.63pt>
 File: Abbildungen/color_decision.jpg Graphic file (type jpg)
 
 <use Abbildungen/color_decision.jpg>
-Package pdftex.def Info: Abbildungen/color_decision.jpg used on input line 156.
+Package pdftex.def Info: Abbildungen/color_decision.jpg used on input line 203.
 
 (pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
- [10
+ [12
 
  <./Abbildungen/Eingang3.jpg> <./Abbildungen/color_decision.jpg>]
 File: Abbildungen/Konzept.pdf Graphic file (type pdf)
  <use Abbildungen/Konzept.pdf>
-Package pdftex.def Info: Abbildungen/Konzept.pdf used on input line 165.
+Package pdftex.def Info: Abbildungen/Konzept.pdf used on input line 212.
 (pdftex.def)             Requested size: 184.3758pt x 169.21954pt.
 pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
 en/Grid}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.165 \end{frame}
-                  [11
+l.212 \end{frame}
+                  [13
 
 ]
-<Abbildungen/Grid.pdf, id=340, 162.6075pt x 163.61125pt>
+<Abbildungen/Grid.pdf, id=406, 162.6075pt x 163.61125pt>
 File: Abbildungen/Grid.pdf Graphic file (type pdf)
 
 <use Abbildungen/Grid.pdf>
-Package pdftex.def Info: Abbildungen/Grid.pdf used on input line 176.
+Package pdftex.def Info: Abbildungen/Grid.pdf used on input line 223.
 (pdftex.def)             Requested size: 138.2795pt x 139.14261pt.
 pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
 en/Grid}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.176 \end{frame}
-                  [12
+l.223 \end{frame}
+                  [14
 
  <./Abbildungen/Grid.pdf>]
 File: Abbildungen/Farb_Vergleich.pdf Graphic file (type pdf)
 
 <use Abbildungen/Farb_Vergleich.pdf>
-Package pdftex.def Info: Abbildungen/Farb_Vergleich.pdf used on input line 191.
+Package pdftex.def Info: Abbildungen/Farb_Vergleich.pdf used on input line 238.
 
 (pdftex.def)             Requested size: 184.3758pt x 78.1681pt.
 pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
 en/Grid}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.191 \end{frame}
-                  [13
+l.238 \end{frame}
+                  [15
 
-] [14
+] [16
 
-] [15
+] [17
 
 ]
 File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
  <use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 246.
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 293.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
 
-<Abbildungen/lbsp_decision.jpg, id=447, 224.84pt x 168.63pt>
+<Abbildungen/lbsp_decision.jpg, id=512, 224.84pt x 168.63pt>
 File: Abbildungen/lbsp_decision.jpg Graphic file (type jpg)
 
 <use Abbildungen/lbsp_decision.jpg>
-Package pdftex.def Info: Abbildungen/lbsp_decision.jpg used on input line 246.
+Package pdftex.def Info: Abbildungen/lbsp_decision.jpg used on input line 293.
 (pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
- [16
+ [18
 
  <./Abbildungen/lbsp_decision.jpg>]
-<Abbildungen/modell.pdf, id=474, 511.9125pt x 233.87375pt>
-File: Abbildungen/modell.pdf Graphic file (type pdf)
-
-<use Abbildungen/modell.pdf>
-Package pdftex.def Info: Abbildungen/modell.pdf used on input line 258.
-(pdftex.def)             Requested size: 291.92444pt x 133.37007pt.
-pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
-en/Grid}) has been already used, duplicate ignored
-<to be read again> 
-                   \relax 
-l.258 \end{frame}
-                  [17
-
- <./Abbildungen/modell.pdf>]
-<Abbildungen/Eingang1.jpg, id=503, 321.2pt x 240.9pt>
-File: Abbildungen/Eingang1.jpg Graphic file (type jpg)
-
-<use Abbildungen/Eingang1.jpg>
-Package pdftex.def Info: Abbildungen/Eingang1.jpg used on input line 287.
-(pdftex.def)             Requested size: 86.04298pt x 64.53291pt.
-
-<Abbildungen/Eingang2.jpg, id=504, 321.2pt x 240.9pt>
-File: Abbildungen/Eingang2.jpg Graphic file (type jpg)
-
-<use Abbildungen/Eingang2.jpg>
-Package pdftex.def Info: Abbildungen/Eingang2.jpg used on input line 287.
-(pdftex.def)             Requested size: 86.04298pt x 64.53291pt.
-
-<Abbildungen/Pfeil.pdf, id=505, 45.04408pt x 53.52959pt>
-File: Abbildungen/Pfeil.pdf Graphic file (type pdf)
-
-<use Abbildungen/Pfeil.pdf>
-Package pdftex.def Info: Abbildungen/Pfeil.pdf used on input line 287.
-(pdftex.def)             Requested size: 19.66705pt x 23.37175pt.
-
-<Abbildungen/Hintergrund.jpg, id=506, 321.2pt x 240.9pt>
-File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
-
-<use Abbildungen/Hintergrund.jpg>
-Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
-(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
-File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
- <use Abbildungen/Hintergrund.jpg>
-Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
-(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
-File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
-
-<use Abbildungen/Hintergrund.jpg>
-Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
-(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
-File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
- <use Abbildungen/Hintergrund.jpg>
-Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
-(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
-File: Abbildungen/Hintergrund.jpg Graphic file (type jpg)
-
-<use Abbildungen/Hintergrund.jpg>
-Package pdftex.def Info: Abbildungen/Hintergrund.jpg used on input line 287.
-(pdftex.def)             Requested size: 96.79521pt x 72.59402pt.
-
-Overfull \hbox (22.72038pt too wide) in paragraph at lines 287--287
- [][] 
- []
-
-[18
-
- <./Abbildungen/Eingang1.jpg> <./Abbildungen/Eingang2.jpg> <./Abbildungen/Pfeil
-.pdf> <./Abbildungen/Hintergrund.jpg>]
 File: Abbildungen/gesamt.pdf Graphic file (type pdf)
- <use Abbildungen/gesamt.pdf>
-Package pdftex.def Info: Abbildungen/gesamt.pdf used on input line 300.
+
+<use Abbildungen/gesamt.pdf>
+Package pdftex.def Info: Abbildungen/gesamt.pdf used on input line 307.
 (pdftex.def)             Requested size: 307.28987pt x 88.47711pt.
 pdfTeX warning (ext4): destination with the same identifier (name{fig:Abbildung
 en/Grid}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.300 \end{frame}
+l.307 \end{frame}
                   [19
 
 ]
 File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
  <use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 320.
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 327.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
 
-<Abbildungen/distance.jpg, id=567, 224.84pt x 168.63pt>
+<Abbildungen/distance.jpg, id=564, 224.84pt x 168.63pt>
 File: Abbildungen/distance.jpg Graphic file (type jpg)
 
 <use Abbildungen/distance.jpg>
-Package pdftex.def Info: Abbildungen/distance.jpg used on input line 320.
+Package pdftex.def Info: Abbildungen/distance.jpg used on input line 327.
 (pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
  [20
 
@@ -1456,117 +1451,117 @@ Package pdftex.def Info: Abbildungen/distance.jpg used on input line 320.
 File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
 
 <use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 344.
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 352.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
 
-<Abbildungen/blinking_pixels1.jpg, id=594, 224.84pt x 168.63pt>
+<Abbildungen/blinking_pixels1.jpg, id=591, 224.84pt x 168.63pt>
 File: Abbildungen/blinking_pixels1.jpg Graphic file (type jpg)
 
 <use Abbildungen/blinking_pixels1.jpg>
-Package pdftex.def Info: Abbildungen/blinking_pixels1.jpg used on input line 34
-4.
+Package pdftex.def Info: Abbildungen/blinking_pixels1.jpg used on input line 35
+2.
 (pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
  [21
 
  <./Abbildungen/blinking_pixels1.jpg>]
 File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
  <use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 368.
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 377.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
 
-<Abbildungen/R.jpg, id=620, 224.84pt x 168.63pt>
-File: Abbildungen/R.jpg Graphic file (type jpg)
- <use Abbildungen/R.jpg>
-Package pdftex.def Info: Abbildungen/R.jpg used on input line 368.
-(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
-
-[22
-
- <./Abbildungen/R.jpg>]
-File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
- <use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 386.
-(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
-
-<Abbildungen/R_color.jpg, id=647, 224.84pt x 168.63pt>
-File: Abbildungen/R_color.jpg Graphic file (type jpg)
-
-<use Abbildungen/R_color.jpg>
-Package pdftex.def Info: Abbildungen/R_color.jpg used on input line 386.
-(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
- [23
-
- <./Abbildungen/R_color.jpg>]
-File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
-
-<use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 405.
-(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
-
-<Abbildungen/R_lbsp.jpg, id=673, 224.84pt x 168.63pt>
-File: Abbildungen/R_lbsp.jpg Graphic file (type jpg)
-
-<use Abbildungen/R_lbsp.jpg>
-Package pdftex.def Info: Abbildungen/R_lbsp.jpg used on input line 405.
-(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
- [24
-
- <./Abbildungen/R_lbsp.jpg>]
-File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
-
-<use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 429.
-(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
-
-<Abbildungen/threshold.jpg, id=700, 224.84pt x 168.63pt>
+<Abbildungen/threshold.jpg, id=617, 224.84pt x 168.63pt>
 File: Abbildungen/threshold.jpg Graphic file (type jpg)
 
 <use Abbildungen/threshold.jpg>
-Package pdftex.def Info: Abbildungen/threshold.jpg used on input line 429.
+Package pdftex.def Info: Abbildungen/threshold.jpg used on input line 377.
 (pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
- [25
+ [22
 
  <./Abbildungen/threshold.jpg>]
 File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
 
 <use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 444.
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 392.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
 
-<Abbildungen/update_array.jpg, id=727, 224.84pt x 168.63pt>
+<Abbildungen/update_array.jpg, id=645, 224.84pt x 168.63pt>
 File: Abbildungen/update_array.jpg Graphic file (type jpg)
 
 <use Abbildungen/update_array.jpg>
-Package pdftex.def Info: Abbildungen/update_array.jpg used on input line 444.
+Package pdftex.def Info: Abbildungen/update_array.jpg used on input line 392.
 (pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
- [26
+ [23
 
  <./Abbildungen/update_array.jpg>]
 File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
 
 <use Abbildungen/Eingang3.jpg>
-Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 459.
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 419.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
 
-<Abbildungen/Segmentierung.jpg, id=752, 321.2pt x 240.9pt>
+<Abbildungen/R.jpg, id=671, 224.84pt x 168.63pt>
+File: Abbildungen/R.jpg Graphic file (type jpg)
+ <use Abbildungen/R.jpg>
+Package pdftex.def Info: Abbildungen/R.jpg used on input line 419.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+
+[24
+
+ <./Abbildungen/R.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+ <use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 437.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/R_color.jpg, id=698, 224.84pt x 168.63pt>
+File: Abbildungen/R_color.jpg Graphic file (type jpg)
+
+<use Abbildungen/R_color.jpg>
+Package pdftex.def Info: Abbildungen/R_color.jpg used on input line 437.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [25
+
+ <./Abbildungen/R_color.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 456.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/R_lbsp.jpg, id=725, 224.84pt x 168.63pt>
+File: Abbildungen/R_lbsp.jpg Graphic file (type jpg)
+
+<use Abbildungen/R_lbsp.jpg>
+Package pdftex.def Info: Abbildungen/R_lbsp.jpg used on input line 456.
+(pdftex.def)             Requested size: 138.2795pt x 103.71326pt.
+ [26
+
+ <./Abbildungen/R_lbsp.jpg>]
+File: Abbildungen/Eingang3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Eingang3.jpg>
+Package pdftex.def Info: Abbildungen/Eingang3.jpg used on input line 472.
+(pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
+
+<Abbildungen/Segmentierung.jpg, id=750, 321.2pt x 240.9pt>
 File: Abbildungen/Segmentierung.jpg Graphic file (type jpg)
 
 <use Abbildungen/Segmentierung.jpg>
-Package pdftex.def Info: Abbildungen/Segmentierung.jpg used on input line 459.
+Package pdftex.def Info: Abbildungen/Segmentierung.jpg used on input line 472.
 (pdftex.def)             Requested size: 138.2795pt x 103.70995pt.
  [27
 
  <./Abbildungen/Segmentierung.jpg>]
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 463.
+(hyperref)                setting the option has no effect on input line 476.
 
 [28
 
 ]
 
 Package hyperref Warning: Option `pdfauthor' has already been used,
-(hyperref)                setting the option has no effect on input line 478.
+(hyperref)                setting the option has no effect on input line 491.
 
 [29
 
@@ -1579,16 +1574,126 @@ Package hyperref Warning: Option `pdfauthor' has already been used,
 ] [33
 
 ]
+File: Abbildungen/Einstieg/original_small.jpg Graphic file (type jpg)
+ <use Abbildungen/Einstieg/original_small.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small.jpg used on input 
+line 603.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [34
+
+]
+<Abbildungen/Einstieg/overlay_small.jpg, id=952, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/overlay_small.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/overlay_small.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/overlay_small.jpg used on input l
+ine 611.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [35
+
+ <./Abbildungen/Einstieg/overlay_small.jpg>]
+<Abbildungen/Einstieg/original_small1.jpg, id=978, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small1.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small1.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small1.jpg used on input
+ line 619.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [36
+
+ <./Abbildungen/Einstieg/original_small1.jpg>]
+<Abbildungen/Einstieg/original_small2.jpg, id=1005, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small2.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small2.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small2.jpg used on input
+ line 628.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [37
+
+ <./Abbildungen/Einstieg/original_small2.jpg>]
+<Abbildungen/Einstieg/original_small3.jpg, id=1032, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small3.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small3.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small3.jpg used on input
+ line 636.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [38
+
+ <./Abbildungen/Einstieg/original_small3.jpg>]
+<Abbildungen/Einstieg/original_small4.jpg, id=1058, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small4.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small4.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small4.jpg used on input
+ line 644.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [39
+
+ <./Abbildungen/Einstieg/original_small4.jpg>]
+<Abbildungen/Einstieg/original_small5.jpg, id=1084, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small5.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small5.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small5.jpg used on input
+ line 652.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [40
+
+ <./Abbildungen/Einstieg/original_small5.jpg>]
+<Abbildungen/Einstieg/original_small6.jpg, id=1110, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small6.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small6.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small6.jpg used on input
+ line 660.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [41
+
+ <./Abbildungen/Einstieg/original_small6.jpg>]
+<Abbildungen/Einstieg/original_small7.jpg, id=1137, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small7.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small7.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small7.jpg used on input
+ line 668.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [42
+
+ <./Abbildungen/Einstieg/original_small7.jpg>]
+<Abbildungen/Einstieg/original_small8.jpg, id=1163, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small8.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small8.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small8.jpg used on input
+ line 676.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [43
+
+ <./Abbildungen/Einstieg/original_small8.jpg>]
+<Abbildungen/Einstieg/original_small9.jpg, id=1190, 592.2125pt x 291.0875pt>
+File: Abbildungen/Einstieg/original_small9.jpg Graphic file (type jpg)
+
+<use Abbildungen/Einstieg/original_small9.jpg>
+Package pdftex.def Info: Abbildungen/Einstieg/original_small9.jpg used on input
+ line 684.
+(pdftex.def)             Requested size: 245.83282pt x 120.83458pt.
+ [44
+
+ <./Abbildungen/Einstieg/original_small9.jpg>] [45
+
+]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 593.
+(Font)              <5> on input line 700.
 LaTeX Font Info:    Font shape `T1/lmss/m/it' in size <5> not available
-(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 593.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 593.
+(Font)              Font shape `T1/lmss/m/sl' tried instead on input line 700.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 700.
 
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [34
+) [46
 
 ]
 \tf@nav=\write6
@@ -1600,11 +1705,11 @@ File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 \tf@snm=\write8
 \openout8 = `Vortrag.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 595.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 595.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 702.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 702.
  (./Vortrag.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 595.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 595.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 702.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 702.
 Package rerunfilecheck Info: File `Vortrag.out' has not changed.
 (rerunfilecheck)             Checksum: 12412F0D83DC46A16E369B5D40F1AA59;179.
 
@@ -1613,11 +1718,11 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 32674 strings out of 493013
- 773058 string characters out of 6133344
+ 32776 strings out of 493013
+ 775582 string characters out of 6133344
  989121 words of memory out of 5000000
- 35473 multiletter control sequences out of 15000+600000
- 51350 words of font info for 50 fonts, out of 8000000 for 9000
+ 35540 multiletter control sequences out of 15000+600000
+ 54134 words of font info for 51 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,18n,98p,789b,2233s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
@@ -1635,10 +1740,10 @@ onts/type1/public/lm/lmsso8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 /lmsy8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmtt10.pfb
 ></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10
 .pfb>
-Output written on Vortrag.pdf (34 pages, 574356 bytes).
+Output written on Vortrag.pdf (46 pages, 1446490 bytes).
 PDF statistics:
- 1024 PDF objects out of 1200 (max. 8388607)
- 939 compressed objects within 10 object streams
- 74 named destinations out of 1000 (max. 500000)
- 172 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1342 PDF objects out of 1440 (max. 8388607)
+ 1232 compressed objects within 13 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

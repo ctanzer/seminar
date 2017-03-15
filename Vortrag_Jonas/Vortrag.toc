@@ -1,4 +1,4 @@
 \select@language {ngerman}
-\beamer@sectionintoc {1}{Self-Balanced SENsitivity SEgmenter}{3}{0}{1}
+\beamer@sectionintoc {1}{Self-Balanced SENsitivity SEgmenter}{4}{0}{1}
 \beamer@sectionintoc {2}{Pixel-Based Adaptive Segmenter}{28}{0}{2}
 \beamer@sectionintoc {3}{Vergleich}{29}{0}{3}

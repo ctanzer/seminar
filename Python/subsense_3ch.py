@@ -3,6 +3,7 @@ import numpy as np
 from numpy import pi
 import threading
 
+
 class PBAS(threading.Thread):
 
     img = 0
@@ -338,7 +339,6 @@ if __name__ == '__main__':
         ret, img = cap.read()
         if ret == False:
             break
-
         pbas_r.image_fetch(img[:,:,0])
         pbas_g.image_fetch(img[:,:,1])
         pbas_b.image_fetch(img[:,:,2])
