@@ -1,3 +1,18 @@
+################################################################################
+# Self-Balanced SENsitivity SEgmenter
+
+# Authors: Christian Tanzer, Jonas Bühlmeyer
+# 03-2017
+
+# Schnittstellenbeschreibung:
+#
+# Dem Algorithmus wird mittels ROS-Topic ein Bild übergeben.
+# Der Name des Topics wird in Zeile 321 dem Subscriber übergeben.
+# Dieses Topic muss vom Typ sensor_msgs.msg.Image sein.
+#
+# Der Name des Ausgangs-Topics wird in Zeile 322 festgelegt.
+# Dieses ist ebenfalls vom Typ sensor_msgs.msg.Image
+
 import cv2
 import numpy as np
 from multiprocessing import Process, Queue
@@ -271,7 +286,7 @@ class SUBSENSE(Process):
                     break
 
             self.init
-            
+
             # Create small version of the input picture
             self.img = cv2.resize(self.img,None,fx=self.downsample, fy=self.downsample, interpolation = cv2.INTER_AREA)
 
@@ -326,7 +341,7 @@ class SUBSENSE(Process):
             self.color()
             # Median Filter
             self.color_decision_blured = cv2.medianBlur(self.color_decision, 5)
-            
+
             # Distance Update
             self.distance_update()
             # Blinking Pixels
@@ -335,10 +350,10 @@ class SUBSENSE(Process):
             self.threshold_update()
             # Update Probability
             self.probability_update()
-            
-            # Background filter 
+
+            # Background filter
             self.background = cv2.medianBlur(self.background, 3)
-            
+
             # Resized Image of the background
             self.large_background = cv2.medianBlur(cv2.resize(self.background,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR),3)
 
@@ -417,7 +432,7 @@ if __name__ == '__main__':
         image_queue_r.put(img[:,:,0])
         image_queue_g.put(img[:,:,1])
         image_queue_b.put(img[:,:,2])
-        
+
         # Start the processes once
         if once == 0:
             once = 1

@@ -7,10 +7,10 @@
 # Schnittstellenbeschreibung:
 #
 # Dem Algorithmus wird mittels ROS-Topic ein Bild übergeben.
-# Der Name des Topics wird in Zeile 302 dem Subscriber übergeben.
+# Der Name des Topics wird in Zeile 316 dem Subscriber übergeben.
 # Dieses Topic muss vom Typ sensor_msgs.msg.Image sein.
 #
-# Der Name des Ausgangs-Topics wird in Zeile 303 festgelegt.
+# Der Name des Ausgangs-Topics wird in Zeile 317 festgelegt.
 # Dieses ist ebenfalls vom Typ sensor_msgs.msg.Image
 
 import cv2
@@ -26,7 +26,6 @@ from cv_bridge import CvBridge
 def callback_get_image(data):
     global img, bridge
     img = bridge.imgmsg_to_cv2(data)*1
-    # img = cv2.cvtColor(bridge.imgmsg_to_cv2(data), cv2.COLOR_BGR2RGB)
 
 
 class PBAS(Process):
@@ -259,7 +258,6 @@ class PBAS(Process):
             self.gradient()
             self.decision()
             self.foreground = cv2.medianBlur(self.foreground, 9)
-            # self.foreground = cv2.medianBlur(cv2.resize(self.foreground,None,fx=1/self.downsample, fy=1/self.downsample, interpolation = cv2.INTER_LINEAR), 15)
 
             # Write foreground to main process
             if self.channel == 0:
