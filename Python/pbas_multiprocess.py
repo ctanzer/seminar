@@ -1,7 +1,7 @@
 ################################################################################
 # Pixel-Based Adaptive Segmenter
 
-# Authors: Christian Tanzer, Jonas Bühlmeyer
+# Authors: Christian Tanzer, Jonas Buehlmeyer
 # 03-2017
 
 import sys
