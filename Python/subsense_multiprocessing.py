@@ -4,14 +4,7 @@
 # Authors: Christian Tanzer, Jonas Bühlmeyer
 # 03-2017
 
-# Schnittstellenbeschreibung:
-#
-# Dem Algorithmus wird mittels ROS-Topic ein Bild übergeben.
-# Der Name des Topics wird in Zeile 321 dem Subscriber übergeben.
-# Dieses Topic muss vom Typ sensor_msgs.msg.Image sein.
-#
-# Der Name des Ausgangs-Topics wird in Zeile 322 festgelegt.
-# Dieses ist ebenfalls vom Typ sensor_msgs.msg.Image
+import sys
 
 import cv2
 import numpy as np
@@ -414,11 +407,10 @@ if __name__ == '__main__':
 
     # ROS Interface
     # Init Node
-    # ROS Topic muss vom Typ sensor_msgs.msg.Image sein
     img = 0
     rospy.init_node('SUBSENSE')
     bridge = CvBridge()
-    subsense_sub = rospy.Subscriber("zed_front_right/rgb/image_raw_color", Image, callback=callback_get_image, queue_size=10)
+    subsense_sub = rospy.Subscriber(sys.argv[1], Image, callback=callback_get_image, queue_size=10)
     subsense_pub = rospy.Publisher("subsense_segmentation", Image, queue_size=10)
 
     while True:
