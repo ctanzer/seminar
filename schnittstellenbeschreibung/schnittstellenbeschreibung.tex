@@ -1,0 +1,45 @@
+\documentclass{article}
+
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{url}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+	\section*{PBAS}
+	Verwendung:
+	\begin{lstlisting}
+	python pbas_multiprocessing.py "TOPICNAME"
+	\end{lstlisting}
+	\vspace{1em}
+	Eingabe: \\
+	
+	String mit Namen des Eingabetopics. Dieses muss vom Typ sensor\_msgs.msg.Image sein.\\
+	\url{http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/Image.html}
+	\vspace{1em}
+	\vspace{1em}
+	
+	Ausgabe: \\
+	
+	Topic "pbas\_segmentation" vom Typ sensor\_msgs.msg.Image.\\
+	\url{http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/Image.html}
+	
+	\section*{SuBSENSE}
+	Verwendung:
+	\begin{lstlisting}
+	python subsense_multiprocessing.py "TOPICNAME"
+	\end{lstlisting}
+	\vspace{1em}
+	Eingabe: \\
+	
+	String mit Namen des Eingabetopics. Dieses muss vom Typ sensor\_msgs.msg.Image sein.\\
+	\url{http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/Image.html}
+	\vspace{1em}
+	\vspace{1em}
+	
+	Ausgabe: \\
+	
+	Topic "subsense\_segmentation" vom Typ sensor\_msgs.msg.Image.\\
+	\url{http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/Image.html}
+\end{document}
