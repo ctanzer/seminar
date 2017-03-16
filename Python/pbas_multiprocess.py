@@ -1,3 +1,18 @@
+################################################################################
+# Pixel-Based Adaptive Segmenter
+
+# Authors: Christian Tanzer, Jonas Bühlmeyer
+# 03-2017
+
+# Schnittstellenbeschreibung:
+#
+# Dem Algorithmus wird mittels ROS-Topic ein Bild übergeben.
+# Der Name des Topics wird in Zeile 302 dem Subscriber übergeben.
+# Dieses Topic muss vom Typ sensor_msgs.msg.Image sein.
+#
+# Der Name des Ausgangs-Topics wird in Zeile 303 festgelegt.
+# Dieses ist ebenfalls vom Typ sensor_msgs.msg.Image
+
 import cv2
 import numpy as np
 from multiprocessing import Process, Queue, Event
@@ -55,8 +70,6 @@ class PBAS(Process):
     def print_params(self):
         """ Prints out Parameters for this instance of class PBAS
 
-        :self: instance of the class PBAS which is calling the function
-
         """
         print 'Parameters:'
         print 'nmbr_min: ', self.nmbr_min
@@ -99,6 +112,9 @@ class PBAS(Process):
 
     # BACKGROUND_DECISION ==========================================================
     def decision(self):
+        """ Decides whether pixel is foreground or brackground
+
+        """
         self.foreground = self.img*0
         d = self.distance()
         self.dist = d
@@ -110,6 +126,9 @@ class PBAS(Process):
 
     # BACKGROUND_UPDATE ============================================================
     def background_update(self, n):
+        """ Updates background models
+
+        """
         # Random pixels with probability 1/T
         rand_array = 100.*np.random.random(self.img.shape)
         update_array = np.logical_and(((100/self.T_rate_arr) > rand_array), self.foreground == 0)
@@ -135,6 +154,11 @@ class PBAS(Process):
 
     # DISTANCE_UPDATE ==============================================================
     def distance_update(self, n):
+        """ Updates minimum distances and calculates average value
+
+        :n: integer for plane to be updated
+
+        """
         # Update minimum distance array
         self.d_min_arr[:,:,n] = self.d_min
         # Calculate average minimum distances
@@ -144,6 +168,9 @@ class PBAS(Process):
 
     # THRESHOLD_UPDATE =============================================================
     def threshold_update(self):
+        """ Updates threshold values
+
+        """
         th_update = self.R_arr > self.d_min_avg * self.R_scale
 
         self.R_arr[th_update] *= (1 - self.R_inc_dec)
@@ -153,6 +180,9 @@ class PBAS(Process):
 
     # LEARNING_RATE_UPDATE =========================================================
     def learn_update(self):
+        """ Updates learning rates
+
+        """
         update_inc = (self.foreground > 0)
         update_dec = (self.foreground == 0)
         self.T_rate_arr[update_inc & (self.d_min > 0)] += self.T_inc/self.d_min[update_inc & (self.d_min > 0)]
@@ -164,12 +194,18 @@ class PBAS(Process):
 
     # PROBABILITY_UPDATE ===========================================================
     def probability_update(self):
+        """ Calculates update probabilities for background models
+
+        """
         self.pixel_probabilities = 1/self.T_rate_arr
     # PROBABILITY_UPDATE ===========================================================
 
     ################################################################################
     # Main function =========================================================
     def run(self):
+        """ Main loop: executes methods and communicates with main process
+
+        """
         while True:
             if self.channel == 0:
                 self.img = image_queue_r.get()
@@ -257,7 +293,8 @@ if __name__ == '__main__':
     T_upper = 150
     alpha = 10
 
-    # Queues
+    # Queues needed for passing image data from main process to channel processes
+    # and segmentation data from channel processes to main process
     image_queue_r = Queue()
     image_queue_g = Queue()
     image_queue_b = Queue()
@@ -265,15 +302,11 @@ if __name__ == '__main__':
     foreground_queue_g = Queue()
     foreground_queue_b = Queue()
 
-    temp_queue = Queue()
-
     # Create an instance per channel
     pbas_r = PBAS(ch_r, N, nmbr_min, R_inc_dec, R_lower, R_scale, T_dec, T_inc, T_lower, T_upper, alpha)
     pbas_g = PBAS(ch_g, N, nmbr_min, R_inc_dec, R_lower, R_scale, T_dec, T_inc, T_lower, T_upper, alpha)
     pbas_b = PBAS(ch_b, N, nmbr_min, R_inc_dec, R_lower, R_scale, T_dec, T_inc, T_lower, T_upper, alpha)
 
-    # Open VideoCapture; here i.e. 'highway.avi'
-    # cap = cv2.VideoCapture('highway.avi')
     once = 0
     n_im = 0
 
@@ -288,12 +321,9 @@ if __name__ == '__main__':
     while True:
         start = time.time()
 
+        # Wait till image contains data
         while type(img) == int:
             rospy.Rate.sleep(rospy.Rate(1))
-        # # Read one frame of the video and break when error occurs (i.e. video ended)
-        # ret, img = cap.read()
-        # if ret == False:
-        #     break
 
         image_queue_r.put(img[:,:,ch_r])
         image_queue_g.put(img[:,:,ch_g])
@@ -311,6 +341,7 @@ if __name__ == '__main__':
 
         foreground = np.logical_or(np.logical_or(foreground_r, foreground_g), foreground_b) * 1.
 
+        # Show original video and segmentation
         cv2.imshow('orig', img)
         cv2.imshow('foreground', foreground)
 
@@ -326,6 +357,7 @@ if __name__ == '__main__':
 
             break
 
+        # Print estimated FPS
         print 'FPS: ', 1/(time.time() - start)
 
     pbas_sub.unregister()
@@ -349,6 +381,5 @@ if __name__ == '__main__':
         print 'pbas_g terminated'
     if not pbas_b.is_alive():
         print 'pbas_b terminated'
-    # cap.release()
+
     cv2.destroyAllWindows()
-    print 'All windows destroyed!'
