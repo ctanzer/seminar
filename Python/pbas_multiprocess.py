@@ -15,6 +15,34 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
+# PARAMETER ########################################################################
+# Set desired parameters
+# depth of the background model
+N = 35
+# number for the color background decision
+nmbr_min = 2
+
+# Weigthing of the gradient model
+alpha = 10
+
+# PARAMETER ########################################################################
+
+# CONSTANTS ########################################################################
+# decrease and increase values fot the probability
+T_dec = 0.1
+T_inc = 1
+# Bounds of the probability
+T_lower = 2
+T_upper = 150
+# decrease and increase value for the threshold
+R_inc_dec = 0.05
+# bounds of the threshold
+R_lower = 18
+R_scale = 5
+# CONSTANTS ########################################################################
+
+
+
 # Get image from topic
 def callback_get_image(data):
     global img, bridge
@@ -272,17 +300,7 @@ if __name__ == '__main__':
     ch_g = 1
     ch_b = 2
 
-    # Set desired parameters
-    N = 35
-    nmbr_min = 2
-    R_inc_dec = 0.05
-    R_lower = 18
-    R_scale = 5
-    T_dec = 0.1
-    T_inc = 1
-    T_lower = 2
-    T_upper = 150
-    alpha = 10
+
 
     # Queues needed for passing image data from main process to channel processes
     # and segmentation data from channel processes to main process

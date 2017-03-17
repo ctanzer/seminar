@@ -15,6 +15,42 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 
+# PARAMETER ########################################################################
+# Set some parameters
+# Minimal number of the lbsp background decision
+nmbr_min_lbsp = 12
+# Number of the depth of the background model
+N_color = 50
+# Minimal number of the color background decision
+nmbr_min_color = 2
+
+# Threshold factor for the color decision
+R_color = 30
+# Threshold factor for the lbsp  decision
+R_lbsp = 3
+
+# Downsample rate to make the algorithm with big pictures faster
+downsample = 0.5
+
+# PARAMETER ########################################################################
+
+# CONSTANTS ########################################################################
+# Bounds of the probability
+T_lower = 2
+T_upper = 256
+# Number of values in the grid -- Do not change
+N_grid = 16
+
+# Threshold factor for lbsp -- Self lerning
+T_r = 0.003
+# Lerning rate
+alpha = 0.03
+# increase and decrease value for the blinking pixel array
+v_incr = 1
+v_decr = 0.1
+# CONSTANTS ########################################################################
+
+
 # Get image from topic
 def callback_get_image(data):
     global img, bridge
@@ -371,22 +407,7 @@ if __name__ == '__main__':
     channel_g = 2
     channel_b = 3
 
-    T_r = 0.003
-    N_grid = 16
-    nmbr_min_lbsp = 12
-    N_color = 50
-    nmbr_min_color = 2
 
-    R_color = 30
-    R_lbsp = 3
-
-    T_update = 2
-    T_lower = 2
-    T_upper = 256
-
-    alpha = 0.03
-    v_incr = 1
-    v_decr = 0.1
 
     background_queue_r = Queue()
     background_queue_g = Queue()
@@ -395,8 +416,6 @@ if __name__ == '__main__':
     image_queue_r = Queue()
     image_queue_g = Queue()
     image_queue_b = Queue()
-
-    downsample = 0.5
 
     # Create one instance per channel
     subsense_r = SUBSENSE(channel_r, T_r, N_grid, nmbr_min_lbsp, N_color, nmbr_min_color, R_color,R_lbsp, T_lower, T_upper, alpha, v_incr, v_decr, downsample)

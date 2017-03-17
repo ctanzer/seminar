@@ -46,5 +46,5 @@
 	\section*{Parameter}
 	In beiden Skripten ist unterhalb der Import Anweisungen ein Abschnitt mit Parametern und Konstanten deklariert.
 	Die Funktion der Parameter und Konstanten wird direkt im Skript in Form von Kommentaren erkl\"art.
-	Die Parameter k\"onnen an die aktuellen Bed\"urfnisse angepasst werden, während die Konstanten f\"ur fast alle Einsatzszenarien unver\"andert bleiben k\"onnen.
+	Die Parameter k\"onnen an die aktuellen Bed\"urfnisse angepasst werden, während die Konstanten f\"ur fast alle Einsatzszenarien unver\"andert bleiben können.
 \end{document}
