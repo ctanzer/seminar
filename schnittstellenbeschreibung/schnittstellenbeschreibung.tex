@@ -45,6 +45,59 @@
 
 	\section*{Parameter}
 	In beiden Skripten ist unterhalb der Import Anweisungen ein Abschnitt mit Parametern und Konstanten deklariert.
-	Die Funktion der Parameter und Konstanten wird direkt im Skript in Form von Kommentaren erkl\"art.
+	Die Funktion der Parameter und Konstanten wird im Folgenden und direkt im Skript in Form von Kommentaren erkl\"art.
 	Die Parameter k\"onnen an die aktuellen Bed\"urfnisse angepasst werden, während die Konstanten f\"ur fast alle Einsatzszenarien unver\"andert bleiben k\"onnen.
+
+	\subsection*{PBAS}
+	\label{sub:subsection_name}
+	Im folgenden sind die Parameter und Konstanten mit ihren Default Werten (in Klammern hinter dem Variablen Namen) gegeben.
+	Diese befinden sich auch im Paper \url{http://ieeexplore.ieee.org/document/6238925/} auf Seite 41. Dort ist auch eine kurze Beschreibung f\"ur jeden der Parameter gegeben. Sollte der Parameter auf einer abweichenden Seite aufgef\"uhrt sein, wird dies am Ende der Beschreibung in Klammern angegeben.
+	\subsubsection*{Parameter}
+	\label{ssub:parameter}
+	
+	\paragraph*{N (35):} Bei N handelt es sich um die Ebenen/Schichten des Hintergrundmodells
+	\paragraph*{nmbr\_min (2):} Die Anzahl an entsprechenden Hintergrundpixel die kleiner als die Schwelle sein m\"ussen, damit ein Pixel als Hintergrund erkannt wird
+	\paragraph*{alpha (10):} Gradientengewichtungsfaktor (Seite 42)
+
+	\subsubsection*{Konstanten}
+	\label{ssub:konstanten}
+	
+	\paragraph*{T\_dec (0.1):} Wahrscheinlichkeitsverringerungsfaktor, wenn ein Objekt als Vordergrund erkannt wird, wir die Updatewahrscheinlichkeit um diesen Faktor verringert
+	\paragraph*{T\_inc (1):} Wahrscheinlichkeiterh\"ohungsfaktor, wenn ein Objekt Hintergrund ist, wird die Updatewahrscheinlichkeit um diesen Faktor erh\"oht
+	\paragraph*{T\_lower (2):} Untere Grenze der Aktualisierungs-Wahrscheinlichkeit
+	\paragraph*{T\_upper (150):} Obere Grenze der Aktualisierungs-Wahrscheinlichkeit
+	\paragraph*{R\_inc\_dec (0.05):} \"Anderungsrate der Schwelle
+	\paragraph*{R\_lower (18):} Untere Grenze der Schwelle
+	\paragraph*{R\_scale (5):} Skalierungsfaktor der Schwelle in der Regelschleife 
+
+
+
+	\subsection*{SuBSENSE}
+	\label{sub:subsection_name}
+	Im folgenden sind die Parameter und Konstanten mit ihren Default Werten (in Klammern hinter dem Variablen Namen) gegeben.
+	Diese befinden sich auch im Paper \url{http://ieeexplore.ieee.org/document/6975239/}. Die Seitenzahlen sind bei dem jeweiligen Parameter bzw. der jeweiligen Konstante gegeben.
+	\subsubsection*{Parameter}
+	\label{ssub:parameter}
+	
+	\paragraph*{nmbr\_min\_lbsp (12):} Anzahl f\"ur den LBSP Vergleich. Stimmen mehr Stellen der beiden Vergleichs LBSP \"uberein als dieser Wert, wird der Pixel als Hintergrund eingeordnet (Seite 362)
+	\paragraph*{N\_color (50):} Anzahl der Ebenen/Schichten des Hintergrundmodells (Seite 364)
+	\paragraph*{nmbr\_min\_color (2):} Die Anzahl an entsprechenden Hintergrundpixel die kleiner als die Schwelle sein m\"ussen, damit ein Pixel als Hintergrund erkannt wird (Seite 363)
+	\paragraph*{R\_color (30):} Faktor um aus der allgemeinen Schwelle R das Schwellwert-Array f\"ur den Farbvergleich zu erhalten (Seite 366)
+	\paragraph*{R\_lbsp (3):} Faktor um aus der allgemeinen Schwelle R das Schwellwert-Array f\"ur den LBSP-Vergleich zu erhalten (Seite 366)
+	\paragraph*{downsample (0.5):} Faktor um den Algorithmus zu beschleunigen. Dies geschieht indem das Eingabebild auf ein kleineres Format umgerechnet wird. Bei einem Faktor 0.5 wird das Bild in H\"ohe und Breite halbiert. Dies f\"uhrt zu einer Viertelung des Aufwands. (Nicht im Paper enthalten)
+
+	\subsubsection*{Konstanten}
+	\label{ssub:konstanten}
+
+	
+	\paragraph*{T\_lower (2):} Untere Grenze der Aktualisierungs-Wahrscheinlichkeit (Seite 366)
+	\paragraph*{T\_upper (256):} Obere Grenze der Aktualisierungs-Wahrscheinlichkeit (Seite 366)
+	\paragraph*{N\_grid (16):} Anzahl der Vergleichspixel im Raster, sollte nur ge\"andert werden, wenn auch das Raster und die entsprechenden Funktion angepasst werden!
+	\paragraph*{T\_r (0.003)} Relative Schwelle f\"u den LBSP Vergleich (Seite 363)
+	\paragraph*{alpha (0.03):} Faktor der die Lerngeschwindigkeit des Dynamik Arrays Dmin angibt (Seite 365)
+	\paragraph*{v\_incr (1):} Faktor um den v erh\"oht wird, wenn ein blinkender Pixel detektiert wurde (Seite 365)
+	\paragraph*{v\_decr (0.01):} Faktor um den v verringert wird, wenn kein blinkender Pixel detektiert wurde (Seite 365)
+
+
+	
 \end{document}
